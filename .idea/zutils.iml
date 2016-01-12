@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CPP_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/lib/googletest/src/gtest_main.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/googletest/src/gtest-all.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/googletest/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/googletest/cmake/internal_utils.cmake" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/src/lock.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/src/zthread.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/logger.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/common.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/zthread.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/args_parser.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/zfile.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/histogram.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/ini_parser.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/buffer.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/string_utils.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/lock.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/zlog.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/array.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/simple_log.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/container_utils.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/ztime.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/numric_utils.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/include/file_utils.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/test/container_utils_ut.cc" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Header Search Paths">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/lib/googletest/include" />
+          <root url="file://$MODULE_DIR$/utils/include" />
+          <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include" />
+          <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include-fixed" />
+          <root url="file://C:/cygwin64/usr/include" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/lib/googletest/include" />
+          <root url="file://$MODULE_DIR$/utils/include" />
+          <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include" />
+          <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include-fixed" />
+          <root url="file://C:/cygwin64/usr/include" />
+        </SOURCES>
+        <excluded>
+          <root url="file://$MODULE_DIR$/utils/include/logger.h" />
+          <root url="file://$MODULE_DIR$/utils/include/common.h" />
+          <root url="file://$MODULE_DIR$/utils/include/zthread.h" />
+          <root url="file://$MODULE_DIR$/utils/include/args_parser.h" />
+          <root url="file://$MODULE_DIR$/utils/include/zfile.h" />
+          <root url="file://$MODULE_DIR$/utils/include/histogram.h" />
+          <root url="file://$MODULE_DIR$/utils/include/ini_parser.h" />
+          <root url="file://$MODULE_DIR$/utils/include/buffer.h" />
+          <root url="file://$MODULE_DIR$/utils/include/string_utils.h" />
+          <root url="file://$MODULE_DIR$/utils/include/lock.h" />
+          <root url="file://$MODULE_DIR$/utils/include/zlog.h" />
+          <root url="file://$MODULE_DIR$/utils/include/array.h" />
+          <root url="file://$MODULE_DIR$/utils/include/simple_log.h" />
+          <root url="file://$MODULE_DIR$/utils/include/container_utils.h" />
+          <root url="file://$MODULE_DIR$/utils/include/ztime.h" />
+          <root url="file://$MODULE_DIR$/utils/include/numric_utils.h" />
+          <root url="file://$MODULE_DIR$/utils/include/file_utils.h" />
+        </excluded>
+      </library>
+    </orderEntry>
+  </component>
+</module>
