@@ -9,7 +9,9 @@
 
 namespace zutils {
 
-    class Array
+    class Array {
+
+    };
 }
 
 #endif //ZUTILS_ARRAY_H
