@@ -1,3 +1,3 @@
 # zlz_cpp_utils
 
-a personal cpp utilities
+some personal cpp utilities
