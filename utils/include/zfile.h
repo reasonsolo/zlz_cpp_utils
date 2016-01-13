@@ -10,42 +10,47 @@
 
 ZUTIL_NAMESPACE_BEGIN
 
-    class File: private NoCopy {
-    public:
+class File : private NoCopy {
+public:
 
-        File(const string& filename);
-        virtual ~File();
-        void Touch();
+    File(const string& filename);
 
-        string filename() const;
-    private:
-        /*
-         * a file must has a name
-         */
-        File();
-        virtual void Open();
-        virtual void Close();
+    virtual ~File();
 
-        string filename_;
-    };
+    void Touch();
+
+    string filename() const;
+
+private:
+    /*
+     * a file must has a name
+     */
+    File();
+
+    virtual void Open();
+
+    virtual void Close();
+
+    string filename_;
+};
 
 
-    class ReadableFile: public File {
-    public:
-        /*
-         * read from file for a max length (all if len = 0)
-         * return size of bytes read
-         */
-        size_t Read(string& buf, size_t len = 0);
-    };
+class ReadableFile : public File {
+public:
+    /*
+     * read from file for a max length (all if len = 0)
+     * return size of bytes read
+     */
+    size_t Read(string& buf, size_t len = 0);
+};
 
-    class WritableFile: public ReadableFile {
-    public:
-        WritableFile(const string& filename, bool append = false);
+class WritableFile : public ReadableFile {
+public:
+    WritableFile(const string& filename, bool append = false);
 
-        size_t Write(string& buf);
+    size_t Write(string& buf);
 
-    };
+};
 
 ZUTIL_NAMESPACE_END
 

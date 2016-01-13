@@ -10,30 +10,53 @@
 
 ZUTIL_NAMESPACE_BEGIN
 
-    class ScopedMutex: private NoCopy {
-    public:
-        ScopedMutex(pthread_mutex_t* lock);
-        ~ScopedMutex();
-    private:
-        pthread_mutex_t* lock_;
-    };
 
-    class ScopedReadLock: private NoCopy {
-    public:
-        ScopedReadLock(pthread_rwlock_t* lock);
-        ~ScopedReadLock();
-    private:
-        pthread_rwlock_t* lock_;
-    };
+class Lock: public NoCopy {
 
-    class ScopedWriteLock: private NoCopy {
-    public:
-        ScopedWriteLock(pthread_rwlock_t* lock);
-        ~ScopedWriteLock();
-    private:
-        pthread_rwlock_t* lock_;
-    };
+public:
+    Lock();
 
+    ~Lock();
+
+    void Lockon();
+
+    void Unlock();
+
+    bool TryLock();
+
+private:
+    pthread_mutex_t lock_;
+};
+
+class ScopedMutex : private NoCopy {
+public:
+    ScopedMutex(pthread_mutex_t* lock);
+
+    ~ScopedMutex();
+
+private:
+    pthread_mutex_t* lock_;
+};
+
+class ScopedReadLock : private NoCopy {
+public:
+    ScopedReadLock(pthread_rwlock_t* lock);
+
+    ~ScopedReadLock();
+
+private:
+    pthread_rwlock_t* lock_;
+};
+
+class ScopedWriteLock : private NoCopy {
+public:
+    ScopedWriteLock(pthread_rwlock_t* lock);
+
+    ~ScopedWriteLock();
+
+private:
+    pthread_rwlock_t* lock_;
+};
 
 
 ZUTIL_NAMESPACE_END

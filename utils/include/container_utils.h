@@ -15,9 +15,9 @@ public:
     template <typename Container1, typename Container2>
     static bool CompareContainer(const Container1& container1, const Container2& container2) {
         if (container1.size() > container2.size()) {
-            return std::equal(container1.begin(), container1.end(), container2.begin());
-        } else {
             return std::equal(container2.begin(), container2.end(), container1.begin());
+        } else {
+            return std::equal(container1.begin(), container1.end(), container2.begin());
         }
     }
 

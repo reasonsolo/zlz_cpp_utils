@@ -9,9 +9,9 @@
 
 ZUTIL_NAMESPACE_BEGIN
 
-    class Histogram {
+class Histogram {
 
-    };
+};
 
 ZUTIL_NAMESPACE_END
 

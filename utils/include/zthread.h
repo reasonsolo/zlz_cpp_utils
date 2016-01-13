@@ -8,41 +8,75 @@
 #include "common.h"
 
 ZUTIL_NAMESPACE_BEGIN
+/*
+ * must use a heap thread object but not any stack object
+ */
+class Thread : private NoCopy {
+public:
+    Thread();
+
+    virtual ~Thread();
+
+    void Start();
+
+    void Stop(bool wait_stop);
+
     /*
-     * must use a heap thread object but not any stack object
+     * send a kill signal
      */
-    class ZThread: private NoCopy {
-    public:
-        virtual void Start();
+    void Kill();
 
-        virtual void Stop();
-        /*
-         * implement this method in sub-class
-         */
-        virtual void Run() = 0;
+    void Detach();
 
-        void SetStackSize(size_t size);
+    void Join();
 
-        static uint32_t GetThreadId();
+    /*
+     * implement this method in sub-class
+     */
+    virtual void Run() = 0;
 
-        uint32_t thread_id();
-    private:
-        /*
-         * before start
-         */
-        virtual void Prepare();
-        /*
-         * after stop
-         */
-        virtual void Cleanup();
 
-        static void* ThreadRoutine(void* arg);
+    /*
+     * use this before start
+     */
+    void SetStackSize(size_t size);
 
-        pthread_t      id_;
-        pthread_attr_t attr_;
-        volatile bool  stop_;
+    static uint32_t GetThreadId();
 
-    };
+    uint32_t thread_id();
+
+private:
+
+
+    /*
+     * before start
+     */
+    virtual void Prepare();
+
+    /*
+     * after stop
+     */
+    virtual void Cleanup();
+
+    static void* ThreadRoutine(void* arg);
+
+    pthread_t thread_id_;
+    pthread_attr_t attr_;
+    volatile bool is_detached_;
+    volatile bool stop_;
+
+};
+
+
+class ThreadCond : public NoCopy {
+public:
+    ThreadCond();
+    ~ThreadCond();
+
+
+private:
+    pthread_cond_t cond_;
+};
 
 
 ZUTIL_NAMESPACE_END
