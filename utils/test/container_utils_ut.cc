@@ -15,8 +15,8 @@ TEST(ContainerTest, CompareTest) {
     vector<int32_t> c {1, 2, 3, 4, 5, 6};
 
     EXPECT_TRUE(ContainerUtils::CompareContainer(a, b));
-    EXPECT_FALSE(ContainerUtils::CompareContainer(a, c));
-    EXPECT_FALSE(ContainerUtils::CompareContainer(c, a));
+    EXPECT_TRUE(ContainerUtils::CompareContainer(a, c));
+    EXPECT_TRUE(ContainerUtils::CompareContainer(c, a));
 }
 
 TEST(ContainerTest, CopyTest) {

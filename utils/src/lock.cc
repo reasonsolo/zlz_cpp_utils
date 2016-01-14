@@ -13,7 +13,11 @@ Lock::Lock() {
 Lock::~Lock() {
 }
 
-void Lock::Lockon() {
+pthread_mutex_t& Lock::lock() {
+    return lock_;
+}
+
+void Lock::Lockup() {
     pthread_mutex_lock(&lock_);
 }
 
@@ -51,4 +55,9 @@ ScopedMutex::ScopedMutex(pthread_mutex_t* lock) {
 
 ScopedMutex::~ScopedMutex() {
     pthread_mutex_unlock(lock_);
+}
+
+ScopedMutex::ScopedMutex(Lock& lock) {
+    lock_ = &lock.lock();
+    pthread_mutex_lock(lock_);
 }

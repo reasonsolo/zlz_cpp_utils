@@ -6,8 +6,25 @@
 #define ZUTILS_THREAD_H
 
 #include "common.h"
+#include "lock.h"
 
 ZUTIL_NAMESPACE_BEGIN
+
+class ThreadCond : public NoCopy {
+public:
+    ThreadCond();
+
+    ~ThreadCond();
+
+    bool Wait(Lock& lock, int64_t wait_time_ms = 0);
+
+    void Signal();
+
+
+private:
+    pthread_cond_t cond_;
+};
+
 /*
  * must use a heap thread object but not any stack object
  */
@@ -41,13 +58,24 @@ public:
      */
     void SetStackSize(size_t size);
 
-    static uint32_t GetThreadId();
+    static pthread_t GetThreadId();
 
-    uint32_t thread_id();
+    pthread_t thread_id();
+
+    /*
+     * call by other threads
+     */
+    void Wakeup();
+
+protected:
+    /*
+     * call in subclass itself
+     */
+    void DoWakeup();
+
+    void Sleep(int32_t time_ms = 0);
 
 private:
-
-
     /*
      * before start
      */
@@ -60,23 +88,24 @@ private:
 
     static void* ThreadRoutine(void* arg);
 
+    enum State {
+        kSleeping,
+        kWakedup,
+        kRunning,
+        kStopped
+    };
+
+    volatile State state_;
     pthread_t thread_id_;
     pthread_attr_t attr_;
     volatile bool is_detached_;
     volatile bool stop_;
 
+    ThreadCond cond_;
+    Lock       lock_;
+
 };
 
-
-class ThreadCond : public NoCopy {
-public:
-    ThreadCond();
-    ~ThreadCond();
-
-
-private:
-    pthread_cond_t cond_;
-};
 
 
 ZUTIL_NAMESPACE_END

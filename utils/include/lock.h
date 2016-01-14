@@ -18,11 +18,13 @@ public:
 
     ~Lock();
 
-    void Lockon();
+    void Lockup();
 
     void Unlock();
 
     bool TryLock();
+
+    pthread_mutex_t& lock();
 
 private:
     pthread_mutex_t lock_;
@@ -31,7 +33,7 @@ private:
 class ScopedMutex : private NoCopy {
 public:
     ScopedMutex(pthread_mutex_t* lock);
-
+    ScopedMutex(Lock& lock);
     ~ScopedMutex();
 
 private:
