@@ -33,10 +33,13 @@ using std::make_pair;
 #define WARN_LOG(x)  std::cerr << x << std::endl;
 #define FATAL_LOG(x) std::cerr << x << std::endl;
 
-
 #define ZUTIL_NAMESPACE_BEGIN namespace zutil {
 #define ZUTIL_NAMESPACE_END   }
 #define ZUTIL_NAMESPACE_USE   using namespace zutil
+
+#define ZUTIL_NET_NAMESPACE_BEGIN namespace zutils { namespace net {
+#define ZUTIL_NET_NAMESPACE_END   }}
+#define ZUTIL_NET_NAMESPACE_USE   use namespace zutils::net;
 
 /*
  * implict cast, usage: implict_cast<TO>(from)
