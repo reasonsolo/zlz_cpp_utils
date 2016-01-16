@@ -3,13 +3,14 @@
 //
 
 #include "timer_event.h"
+#include "time_utils.h"
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
-Atomic64 TimerEvent::seq_counter_(0);
+AtomicU64 TimerEvent::seq_counter_(0);
 
-TimerEvent::TimerEvent(TimerCallback&& cb, const int64_t when, const int32_t interval) :
-        callback_(std::move(cb)), when_(when), interval_(interval), seq_(seq_counter_.Incr()) {
+TimerEvent::TimerEvent(const TimerCallback& cb, const int64_t when, const int32_t interval) :
+        callback_(cb), when_(when), interval_(interval), seq_(seq_counter_.Incr()) {
 
 }
 
@@ -24,8 +25,8 @@ void TimerEvent::Run() {
     }
 }
 
-bool TimerEvent::isValid() const {
-    return when_ > TimeUtils::GetTimestampInMS();
+bool TimerEvent::IsValid() const {
+    return when_ > TimeUtils::GetTickMS();
 }
 
 

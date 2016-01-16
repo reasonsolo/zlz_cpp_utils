@@ -43,9 +43,9 @@ using std::make_pair;
 #define ZUTIL_NAMESPACE_END   }
 #define ZUTIL_NAMESPACE_USE   using namespace zutil
 
-#define ZUTIL_NET_NAMESPACE_BEGIN namespace zutils { namespace net {
+#define ZUTIL_NET_NAMESPACE_BEGIN namespace zutil { namespace net {
 #define ZUTIL_NET_NAMESPACE_END   }}
-#define ZUTIL_NET_NAMESPACE_USE   use namespace zutils::net;
+#define ZUTIL_NET_NAMESPACE_USE   using namespace zutil::net
 
 #define handle_sys_error(x) perror(x)
 

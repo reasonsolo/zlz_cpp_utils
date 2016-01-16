@@ -6,34 +6,35 @@
 #define ZUTILS_POLLER_H
 
 #include "common.h"
-#include "event_loop.h"
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
 class EventLoop;
+
 class Channel;
 
-NO_COPY_CLASS(Poller) {
+class Poller {
 public:
-    Poller();
+    Poller(EventLoop* loop);
 
     virtual ~Poller();
 
-    int32_t Poll(uint32_t time_ms, vector<Channel*>& active_events);
+    virtual int32_t Poll(int64_t time_ms, vector<Channel*>& active_events) = 0;
 
-    void Init(uint32_t size);
+    virtual void UpdateChannel(Channel* channel) = 0;
 
-    void Destroy();
+    virtual void RemoveChannel(Channel* channel) = 0;
 
-    void SetEvent(Channel* event);
+    bool HasChannel(Channel* channel);
 
     static Poller* GetDefaultPoller(EventLoop* loop);
 
-private:
-
+protected:
+    typedef map<int32_t, Channel*> ChannelMap;
     EventLoop* event_loop_;
+    ChannelMap channels_;
 
-};;
+};
 
 
 ZUTIL_NET_NAMESPACE_END

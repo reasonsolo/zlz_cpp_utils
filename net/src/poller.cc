@@ -3,10 +3,13 @@
 //
 
 #include "poller.h"
+#include "event_loop.h"
+#include "channel.h"
+#include "poll_poller.h"
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
-Poller::Poller() {
+Poller::Poller(EventLoop* loop): event_loop_(loop) {
 
 }
 
@@ -14,23 +17,17 @@ Poller::~Poller() {
 
 }
 
-int32_t Poller::Poll(uint32_t time_ms, vector<Channel*>& active_pollables) {
-    return 0;
-}
-
-void Poller::Init(uint32_t size) {
-
-}
-
-void Poller::Destroy() {
-
-}
-
-void Poller::SetEvent(Channel* event) {
-
+bool Poller::HasChannel(Channel* channel) {
+    if (channel) {
+        return channels_.find(channel->fd()) != channels_.end();
+    }
+    return false;
 }
 
 Poller* Poller::GetDefaultPoller(EventLoop * loop) {
-    return nullptr;
+    return new PollPoller(loop);
 }
+
+
+
 ZUTIL_NET_NAMESPACE_END

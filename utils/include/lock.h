@@ -10,8 +10,7 @@
 
 ZUTIL_NAMESPACE_BEGIN
 
-
-class Lock: public NoCopy {
+class Lock : public NoCopy {
 public:
     Lock();
 
@@ -32,7 +31,9 @@ private:
 class ScopedMutex : private NoCopy {
 public:
     ScopedMutex(pthread_mutex_t* lock);
+
     ScopedMutex(Lock& lock);
+
     ~ScopedMutex();
 
 private:

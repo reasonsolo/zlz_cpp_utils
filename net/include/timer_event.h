@@ -7,21 +7,23 @@
 
 #include "common.h"
 #include "atomic.h"
-#include "time_utils.h"
 #include "callbacks.h"
+#include "string_utils.h"
 
 ZUTIL_NET_NAMESPACE_BEGIN
 ZUTIL_NAMESPACE_USE;
 
-NO_COPY_CLASS(TimerEvent) {
+class TimerEvent {
 public:
-    TimerEvent(TimerCallback&& cb, const int64_t when, const int32_t interval = 0);
+    TimerEvent(const TimerCallback& cb, const int64_t when, const int32_t interval = 0);
 
     virtual ~TimerEvent();
 
     virtual void Run();
 
-    bool isValid() const;
+    bool IsValid() const;
+
+    bool Expired() const;
 
     int32_t interval() const {
         return interval_;
@@ -33,6 +35,10 @@ public:
 
     uint64_t seq() const {
         return seq_;
+    }
+
+    string Tostring() const {
+        return StringUtils::ToString("TimerEvent@", this, ":", when());
     }
 
 private:

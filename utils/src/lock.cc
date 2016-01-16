@@ -5,7 +5,6 @@
 
 ZUTIL_NAMESPACE_USE;
 
-
 Lock::Lock() {
     pthread_mutex_init(&lock_, nullptr);
 }

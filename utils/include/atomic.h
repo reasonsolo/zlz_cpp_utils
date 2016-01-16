@@ -12,6 +12,7 @@ ZUTIL_NAMESPACE_BEGIN
 template <typename T>
 class AtomicInt: public NoCopy {
 public:
+    AtomicInt(): val_() {}
     AtomicInt(T val): val_(val) {}
     ~AtomicInt() {}
 
