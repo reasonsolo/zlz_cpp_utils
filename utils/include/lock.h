@@ -12,7 +12,6 @@ ZUTIL_NAMESPACE_BEGIN
 
 
 class Lock: public NoCopy {
-
 public:
     Lock();
 

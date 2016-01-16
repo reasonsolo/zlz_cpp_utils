@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <list>
 #include <map>
 #include <sstream>
 #include <stdint.h>
@@ -16,8 +17,13 @@
 #include <cstring>
 #include <utility>
 #include <cassert>
+#include <cstdio>
 #include <unistd.h>
 
+/*
+ * you should never name a class duplicating the one in STL
+ */
+using std::list;
 using std::stringstream;
 using std::string;
 using std::vector;
@@ -40,6 +46,8 @@ using std::make_pair;
 #define ZUTIL_NET_NAMESPACE_BEGIN namespace zutils { namespace net {
 #define ZUTIL_NET_NAMESPACE_END   }}
 #define ZUTIL_NET_NAMESPACE_USE   use namespace zutils::net;
+
+#define handle_sys_error(x) perror(x)
 
 /*
  * implict cast, usage: implict_cast<TO>(from)

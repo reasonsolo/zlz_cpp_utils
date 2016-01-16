@@ -60,6 +60,10 @@ public:
 
     static pthread_t GetThreadId();
 
+    static bool IsSelf(pthread_t thread_id) {
+        return GetThreadId() == thread_id;
+    }
+
     pthread_t thread_id();
 
     /*

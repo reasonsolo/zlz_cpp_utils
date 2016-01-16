@@ -5,7 +5,6 @@
 #ifndef ZUTILS_SENSOR_H
 #define ZUTILS_SENSOR_H
 
-
 #include "common.h"
 
 ZUTIL_NAMESPACE_BEGIN
@@ -13,7 +12,7 @@ ZUTIL_NAMESPACE_BEGIN
 /*
  * a pipe as a notification interface
  */
-NO_COPY_CLASS(Sensor) {
+class Sensor {
 public:
     Sensor() {
         assert(pipe(fds_) != -1);
@@ -26,13 +25,18 @@ public:
         }
     }
 
-    virtual void Execute() = 0;
+    int32_t read_fd() const {
+        return fds_[0];
+    }
 
-protected:
+    int32_t write_fd() const {
+        return fds_[1];
+    }
+
     void Notify() {
-        static char signal = 'x';
+        static char finger = 'x';
         while (true) {
-            if (write(fds_[1], &signal, sizeof(signal)) == -1) {
+            if (write(fds_[1], &finger, sizeof(finger)) == -1) {
                 if (EINTR == errno) {
                     continue;
                 }
@@ -41,17 +45,19 @@ protected:
         }
     }
 
-    void GetSignal(int32_t signal) {
+    void GetSignal(uint32_t signal) {
         char signals[1024];
-        while (true) {
-            if (read(fds_[0], reinterpret_cast<void*>(signals), static_cast<size_t>(signal))) {
+        int32_t readed;
+        while (signal > 0) {
+            if (readed = read(fds_[0], reinterpret_cast<void*>(signals), signal)) {
                 if (EINTR == errno) {
                     continue;
                 }
+                signal -= readed;
             }
-            break;
         }
     }
+private:
 
     int32_t fds_[2];
 

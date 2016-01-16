@@ -43,6 +43,11 @@ private:
 };
 
 
+typedef AtomicInt<int64_t>  Atomic64;
+typedef AtomicInt<int32_t>  Atomic32;
+typedef AtomicInt<uint64_t> AtomicU64;
+typedef AtomicInt<uint32_t> AtomicU32;
+
 ZUTIL_NAMESPACE_END
 
 
