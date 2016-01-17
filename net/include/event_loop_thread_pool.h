@@ -22,18 +22,25 @@ public:
 
     void Init(const LoopInitCallback& init_cb);
 
-    void Clearup();
+    void Destroy();
 
     string ToString() const;
 
     EventLoop* GetNextLoop();
 
+    EventLoop* GetLoopByHash(int64_t hash);
+
     void Start();
 
     void Stop();
 
+protected:
+    static void ThreadFunctorRun(EventLoop* loop);
+    static void ThreadFunctorStop(EventLoop* loop);
+
 private:
     uint32_t pool_size_;
+    uint32_t loop_index_;
     LoopInitCallback init_cb_;
     vector<EventLoop*> event_loops_;
     vector<Thread*> threads_;
