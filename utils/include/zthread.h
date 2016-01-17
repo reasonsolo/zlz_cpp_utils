@@ -29,14 +29,17 @@ private:
  * must use a heap thread object but not any stack object
  */
 class Thread : private NoCopy {
+    typedef std::function<void()> Functor;
 public:
     Thread();
 
+    explicit Thread(const Functor& func);
+
     virtual ~Thread();
 
-    void Start();
+    virtual void Start();
 
-    void Stop(bool wait_stop);
+    virtual void Stop(bool wait_stop);
 
     /*
      * send a kill signal
@@ -48,15 +51,21 @@ public:
     void Join();
 
     /*
-     * implement this method in sub-class
-     */
-    virtual void Run() = 0;
-
-
-    /*
      * use this before start
      */
     void SetStackSize(size_t size);
+
+    void set_thread_func(const std::function<void()>& func) {
+        thread_func_ = func;
+    }
+
+    void set_before_start(const Functor& func) {
+        before_start_ = func;
+    }
+
+    void set_before_stop(const Functor& func) {
+        before_stop_ = func;
+    }
 
     static pthread_t GetThreadId();
 
@@ -71,6 +80,8 @@ public:
      */
     void Wakeup();
 
+    string ToString() const;
+
 protected:
     /*
      * call in subclass itself
@@ -78,6 +89,11 @@ protected:
     void DoWakeup();
 
     void Sleep(int32_t time_ms = 0);
+
+    /*
+     * implement this method in sub-class
+     */
+    virtual void Run() {};
 
 private:
     /*
@@ -98,6 +114,10 @@ private:
         kRunning,
         kStopped
     };
+
+    Functor thread_func_;
+    Functor before_start_;
+    Functor before_stop_;
 
     volatile State state_;
     pthread_t thread_id_;

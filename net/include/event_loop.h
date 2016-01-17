@@ -75,13 +75,14 @@ private:
     volatile bool waiting_;
 
     Channel* current_channel_;
+    // TODO: use shared_ptr
     vector<Channel*> active_channels_;
 
     int32_t wake_up_fd_;
     Sensor wake_up_sensor_;
     Channel* wake_up_channel_;
 
-    pthread_mutex_t timer_queue_lock_;
+    pthread_rwlock_t timer_queue_lock_;
     TimerQueue timer_queue_;
 
     static uint32_t poll_wait_time_;

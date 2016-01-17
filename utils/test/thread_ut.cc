@@ -60,5 +60,19 @@ TEST(ThreadTest, CondTest) {
     }
 }
 
+void print_sth(const string& sth, int32_t* count) {
+    DEBUG_LOG("print " << sth);
+    *count = 10;
+}
+
+TEST(ThreadTest, FunctorTest) {
+    int32_t count = 0;
+    Thread* thread = new Thread(std::bind(&print_sth, string("sth"), &count));
+    thread->Start();
+    thread->Stop(true);
+    EXPECT_EQ(10, count);
+
+}
+
 
 

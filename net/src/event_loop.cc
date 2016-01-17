@@ -80,7 +80,7 @@ void EventLoop::GetWakingUpSignal() {
 
 void EventLoop::AddTimer(TimerEvent* event) {
     {
-        ScopedMutex lock(&timer_queue_lock_);
+        ScopedWriteLock lock(&timer_queue_lock_);
         if (event->IsValid()) {
             DEBUG_LOG(ToString() << " inserting timer event " << event->Tostring());
             timer_queue_.insert(make_pair(event->when(), event));
@@ -92,7 +92,7 @@ void EventLoop::AddTimer(TimerEvent* event) {
 }
 
 void EventLoop::RemoveTimer(TimerEvent* event) {
-    ScopedMutex lock(&timer_queue_lock_);
+    ScopedWriteLock lock(&timer_queue_lock_);
     auto range_it = timer_queue_.equal_range(event->when());
     if (range_it.first == timer_queue_.end() && range_it.second == timer_queue_.end()) {
         DEBUG_LOG("cannot find any timer event in loop " << event->Tostring());
@@ -109,7 +109,7 @@ void EventLoop::RemoveTimer(TimerEvent* event) {
 
 int64_t EventLoop::GetNextLoopWaitTime() {
     {
-        ScopedMutex lock(&timer_queue_lock_);
+        ScopedReadLock lock(&timer_queue_lock_);
         if (!timer_queue_.empty()) {
             return timer_queue_.begin()->first;
         }
@@ -119,27 +119,26 @@ int64_t EventLoop::GetNextLoopWaitTime() {
 
 void EventLoop::HandleTimers() {
     TimerQueue expired;
+    TimerQueue::iterator end;
     vector<TimerEvent*> repeated;
     {
-        ScopedMutex lock(&timer_queue_lock_);
+        ScopedReadLock lock(&timer_queue_lock_);
         int64_t now = TimeUtils::GetTickMS();
-        TimerQueue::iterator end = timer_queue_.lower_bound(now);
+        end = timer_queue_.lower_bound(now);
         assert(end == timer_queue_.end() || now < end->first);
         for (auto it = timer_queue_.begin(); it != end; it++) {
             expired.insert(make_pair(it->first, it->second));
         }
-        timer_queue_.erase(timer_queue_.begin(), end);
     }
     for (auto it = expired.begin(); it != expired.end(); it++) {
         it->second->Run();
         if (it->second->interval() > 0) {
             repeated.push_back(it->second);
-        } else {
-            delete it->second;
         }
     }
     if (!repeated.empty()) {
-        ScopedMutex lock(&timer_queue_lock_);
+        ScopedWriteLock lock(&timer_queue_lock_);
+        timer_queue_.erase(timer_queue_.begin(), end);
         for (auto item: repeated) {
             timer_queue_.insert(make_pair(item->when(), item));
         }

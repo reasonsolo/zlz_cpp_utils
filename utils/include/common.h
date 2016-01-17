@@ -19,6 +19,7 @@
 #include <cassert>
 #include <cstdio>
 #include <unistd.h>
+#include <functional>
 
 /*
  * you should never name a class duplicating the one in STL
