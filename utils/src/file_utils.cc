@@ -3,42 +3,9 @@
 //
 
 #include "file_utils.h"
-#include "zfile.h"
+#include <fcntl.h>
 
 ZUTIL_NAMESPACE_BEGIN
-
-int64_t FileUtils::Copy(const string& src, const string& dst) {
-
-    File fsrc(src);
-    File fdst(dst);
-    if (!fsrc.SetRead().Open() || fdst.SetWrite().SetCreate().SetExcl().Open()) {
-        handle_sys_error("cannot open file to copy:");
-        return -1;
-    }
-
-    // use smaller buffer to save memory while copying big files
-    char buf[kIOBufMax];
-    int64_t file_size = 0;
-    for (; ;) {
-        // stupid spelling
-        int64_t readed = fsrc.Read(buf, sizeof(buf) - 1);
-        if (readed > 0) {
-            for (; ;) {
-                if (fdst.Write(buf, static_cast<uint32_t>(readed)) != readed) {
-                    return -1;
-                }
-                break;
-            }
-            file_size += readed;
-        } else if (readed == 0) {
-            break;
-        } else {
-            return -1;
-        }
-    }
-
-    return file_size;
-}
 
 bool FileUtils::Rename(const string& from, const string& to) {
     if (rename(from.c_str(), to.c_str()) == -1) {
@@ -65,6 +32,36 @@ void FileUtils::GetDirectoryAndFile(const string& path, string& dirname, string&
         dirname = path.substr(0, slash_pos);
         filename = path.substr(slash_pos + 1, path.size() - slash_pos - 1);
     }
+}
+
+string FileUtils::GetCurrentWorkPath() {
+    return "";
+}
+
+int64_t FileUtils::GetModificationTime(const string& filename) {
+    int64_t time = -1;
+    struct stat file_stat;
+    if (stat(filename.c_str(), &file_stat) == 0) {
+        time = file_stat.st_mtim.tv_sec * 1000 + file_stat.st_mtim.tv_sec % 1000000;
+    }
+    return time;
+}
+
+int64_t FileUtils::GetFileSize(const string& filename) {
+    int64_t size = -1;
+    struct stat file_stat;
+    if (stat(filename.c_str(), &file_stat) == 0) {
+        size = file_stat.st_size;
+    }
+    return size;
+}
+
+int32_t FileUtils::GetFileMode(const string& filename) {
+    struct stat file_stat;
+    if (stat(filename.c_str(), &file_stat)) {
+        return file_stat.st_mode;
+    }
+    return -1;
 }
 
 ZUTIL_NAMESPACE_END

@@ -14,6 +14,7 @@ class FileUtils {
 public:
     /*
      * return file size copied
+     * TODO: implement this
      */
     static int64_t Copy(const string& src, const string& dst);
 
@@ -32,7 +33,13 @@ public:
      */
     static void GetDirectoryAndFile(const string& path, string& dirname, string& filename);
 
+    static string GetCurrentWorkPath();
 
+    int64_t GetModificationTime(const string& filename);
+
+    int64_t GetFileSize(const string& filename);
+
+    int32_t GetFileMode(const string& filename);
 };
 
 ZUTIL_NAMESPACE_END
