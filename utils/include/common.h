@@ -50,6 +50,8 @@ using std::make_pair;
 
 #define handle_sys_error(x) perror(x)
 
+const uint32_t kIOBufMax = 10 * 1024 * 1024;
+
 /*
  * implict cast, usage: implict_cast<TO>(from)
  */

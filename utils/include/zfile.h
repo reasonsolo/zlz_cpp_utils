@@ -6,51 +6,89 @@
 #define ZUTILS_FILE_H
 
 #include "common.h"
-#include <cstdio>
+#include <fcntl.h>
 
 ZUTIL_NAMESPACE_BEGIN
 
-class File : private NoCopy {
+NO_COPY_CLASS(File) {
 public:
-
     File(const string& filename);
 
-    virtual ~File();
-
-    void Touch();
-
-    string filename() const;
-
-private:
-    /*
-     * a file must has a name
-     */
-    File();
-
-    virtual void Open();
+    virtual bool Open(int32_t flags = -1);
 
     virtual void Close();
 
+    virtual ~File();
+
+    string filename() const {
+        return filename_;
+    };
+
+    int32_t fd() const {
+        return fd_;
+    };
+
+    File& SetRead() {
+        flags_ |= O_RDONLY;
+        return *this;
+    }
+
+    File& SetWrite() {
+        flags_ |= O_WRONLY | O_CREAT;
+        return *this;
+    }
+
+    File& SetReadWrite() {
+        flags_ |= O_RDWR | O_CREAT;
+        return *this;
+    }
+
+    File& SetTrancate() {
+        flags_ |= O_TRUNC;
+        return *this;
+    }
+
+    File& SetAppend() {
+        flags_ |= O_APPEND;
+        return *this;
+    }
+
+    File& SetExcl() {
+        flags_ |= O_EXCL;
+        return *this;
+    }
+
+    File& SetCreate() {
+        flags_ |= O_CREAT;
+        return *this;
+    }
+
+    bool IsReadable() const;
+
+    bool IsWritable() const;
+
+    int64_t Write(char* buf, uint32_t size);
+
+    int64_t Read(char* buf, uint32_t size);
+
+    int64_t ReadAll(string& str_buf);
+
+    int64_t GetSize();
+
+    int64_t GetCreationTime();
+
+    int64_t GetModificationTime();
+
+    int32_t GetMode();
+
+protected:
+
     string filename_;
+    int32_t fd_;
+    int32_t flags_;
 };
 
 
-class ReadableFile : public File {
-public:
-    /*
-     * read from file for a max length (all if len = 0)
-     * return size of bytes read
-     */
-    size_t Read(string& buf, size_t len = 0);
-};
-
-class WritableFile : public ReadableFile {
-public:
-    WritableFile(const string& filename, bool append = false);
-
-    size_t Write(string& buf);
-
-};
 
 ZUTIL_NAMESPACE_END
 

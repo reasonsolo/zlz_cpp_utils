@@ -15,7 +15,9 @@ ZUTIL_NAMESPACE_BEGIN
 class TimeUtils {
 
 public:
-
+    /*
+     * a real-world time stamp
+     */
     static int64_t GetTimestampInMS() {
         timeval tv {0, 0};
         gettimeofday(&tv, NULL);
@@ -62,6 +64,7 @@ public:
 
     /*
      * get cpu cycle time in ms, relative time but not timestamp
+     * do not expose this value to user
      */
     static uint64_t GetTickMS() {
         static uint32_t khz = getCpuKhz();
@@ -70,6 +73,7 @@ public:
 
     /*
      * get cpu cycle time in us, relative time but not timestamp
+     * * do not expose this value to user
      */
     static uint64_t GetTickUS() {
         static double mhz = getCpuMhz();
