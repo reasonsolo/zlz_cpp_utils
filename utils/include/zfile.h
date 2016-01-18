@@ -67,11 +67,16 @@ public:
 
     bool IsWritable() const;
 
-    int64_t Write(char* buf, uint32_t size);
+    int64_t Write(const char* buf, uint32_t size);
 
     int64_t Read(char* buf, uint32_t size);
 
     int64_t ReadAll(string& str_buf);
+
+    /*
+     * this function will block until all data has been flushed
+     */
+    void Flush();
 
     int64_t GetSize();
 

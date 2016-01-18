@@ -74,5 +74,3 @@ TEST(ThreadTest, FunctorTest) {
 
 }
 
-
-

@@ -27,6 +27,12 @@ public:
      */
     static bool Remove(const string& filename);
 
+    /*
+     * split a path to directory name and filename
+     */
+    static void GetDirectoryAndFile(const string& path, string& dirname, string& filename);
+
+
 };
 
 ZUTIL_NAMESPACE_END
