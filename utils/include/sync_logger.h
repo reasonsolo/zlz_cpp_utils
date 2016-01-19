@@ -7,6 +7,8 @@
 
 #include "logger.h"
 #include "lock.h"
+#include <iostream>
+#include <fstream>
 
 ZUTIL_NAMESPACE_BEGIN
 
@@ -16,7 +18,13 @@ public:
     ~SyncLogger();
 
 protected:
+    virtual void DoLog(const LogRecord& record);
+    void BeforeLog();
+    void AfterLog();
+    void Rotate();
+
     pthread_mutex_t lock_;
+    std::ofstream fstream_;
 };
 
 ZUTIL_NAMESPACE_END

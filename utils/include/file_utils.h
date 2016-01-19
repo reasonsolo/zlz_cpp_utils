@@ -35,11 +35,13 @@ public:
 
     static string GetCurrentWorkPath();
 
-    int64_t GetModificationTime(const string& filename);
+    static int64_t GetModificationTime(const string& filename);
 
-    int64_t GetFileSize(const string& filename);
+    static int64_t GetFileSize(const string& filename);
 
-    int32_t GetFileMode(const string& filename);
+    static int32_t GetFileMode(const string& filename);
+
+    static string ConcatPathFile(const string& path, const string& filename);
 };
 
 ZUTIL_NAMESPACE_END

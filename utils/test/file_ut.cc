@@ -3,26 +3,11 @@
 //
 
 #include <gtest/gtest.h>
-#include "zfile.h"
 #include "file_utils.h"
 #include "time_utils.h"
 #include "common.h"
 
 ZUTIL_NAMESPACE_USE;
-
-TEST(FileTest, ReadWriteTest) {
-    // TODO: fix this ut
-    string content = "hello world!";
-    string filename = "/cygdrive/c/Users/zlz/ClionProjects/zutils/utils/test/tst.tmp";
-    File wr_file(filename);
-    EXPECT_TRUE(wr_file.SetReadWrite().SetCreate().Open());
-    EXPECT_TRUE(wr_file.Write(content.c_str(), content.size()) > 0);
-    wr_file.Flush();
-    string readed;
-    EXPECT_EQ(content.size(), wr_file.ReadAll(readed));
-    // EXPECT_EQ(TimeUtils::GetTimestampInMS() / 1000, wr_file.GetModificationTime() / 1000);
-    EXPECT_STREQ(content.c_str(), readed.c_str());
-}
 
 
 TEST(FileUtilsTest, DirnameTest) {

@@ -64,4 +64,14 @@ int32_t FileUtils::GetFileMode(const string& filename) {
     return -1;
 }
 
+string FileUtils::ConcatPathFile(const string& path, const string& filename) {
+    if (path.empty()) {
+        return filename;
+    }
+    if (path.back() == '/') {
+        return path + filename;
+    }
+    return path + "/" + filename;
+}
+
 ZUTIL_NAMESPACE_END

@@ -28,9 +28,11 @@ struct LogRecord {
     string file_name;
     uint32_t line_num;
     int64_t timestamp;
-    string message;
+    std::ostringstream& message;
 
-    void SetMessage(std::ostringstream& ss);
+    LogRecord(std::ostringstream& ss) : message(ss) {
+
+    }
 };
 
 enum class LoggerType {
@@ -45,28 +47,62 @@ const uint32_t kDefaultRotationSize = 100 * 1024 * 1024; // 100M
  */
 class Logger {
 public:
-    Logger(const string& name, uint32_t rotation_size = kDefaultRotationSize);
+    Logger() { }
+
+    Logger(const string& name, int32_t rotation_size = kDefaultRotationSize);
+
     virtual ~Logger();
 
-    Logger* Create(const LoggerType type, const string& log_name, uint32_t rotation_size);
+    void set_path(const string& path) {
+        path_ = path;
+    }
+
+    void set_level(const LogLevel level) {
+        level_ = level;
+    }
+
+    bool IsLevelEnabeld(const LoggerType type) const;
 
     virtual void Log(const LogLevel lvl, const char* file_name, const uint32_t line_num, std::ostringstream& ss);
+
+    static Logger* Create(const LoggerType type, const string& log_name, uint32_t rotation_size);
+
+    static Logger* GetLogger(const string& name);
+
+    static Logger* GetDefaultLogger();
+
+    static string GetLogLevelStr(LogLevel lvl);
+
+    LogLevel level() const {
+        return level_;
+    }
+
+    string path() const {
+        return path_;
+    }
+
+    string GetCurrentFilename() const;
+
+    string GetRotationFilename() const;
 
 protected:
     virtual void DoLog(const LogRecord& record) = 0;
 
-    string   log_name_;
-    uint32_t rotation_size_;
+    LogLevel level_;
+    string path_;
+    string base_filename_;
+    int32_t rotation_size_;
+    volatile uint32_t file_count_;
 
-    static string log_affix_;
+    static string               log_suffix_;
+    static LoggerType           default_logger_type_;
+    static pthread_rwlock_t     loggers_lock_;
+    static map<string, Logger*> loggers_;
+    static Logger*              default_logger_;
+
 };
 
-class LogManager {
-public:
 
-protected:
-
-};
 
 ZUTIL_NAMESPACE_END
 
