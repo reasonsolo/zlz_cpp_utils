@@ -73,6 +73,10 @@ public:
 
     static string GetLogLevelString(LogLevel lvl);
 
+    virtual void Prepare() {};
+
+    virtual void ClearUp() {};
+
     LogLevel level() const {
         return level_;
     }

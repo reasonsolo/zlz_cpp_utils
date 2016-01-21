@@ -17,18 +17,24 @@ SyncLogger::~SyncLogger() {
 }
 
 void SyncLogger::DoLog(const LogRecord& record) {
-    TRACE_LOG("try to do log");
-    ScopedMutex lock(&lock_);
+    // ScopedMutex lock(&lock_);
     BeforeLog();
     if (fstream_.good()) {
-        fstream_ << "[" << Logger::GetLogLevelString(level_) << "]"
+        fstream_ << "[" << Logger::GetLogLevelString(record.level) << "]"
                  << TimeUtils::TimestampToString(record.timestamp) << " "
                  << record.file_name << ":" << record.line_num << " "
                  << record.message.rdbuf() << std::endl;
         fstream_.flush();
     }
-    TRACE_LOG("log done");
     AfterLog();
+}
+
+void SyncLogger::Prepare() {
+    lock_.Lockup();
+}
+
+void SyncLogger::ClearUp() {
+    lock_.Unlock();
 }
 
 void SyncLogger::BeforeLog() {

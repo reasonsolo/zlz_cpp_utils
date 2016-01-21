@@ -12,18 +12,26 @@
 
 ZUTIL_NAMESPACE_BEGIN
 
-class SyncLogger: public Logger {
+class SyncLogger : public Logger {
 public:
     SyncLogger(const string& name, uint32_t rotation_size);
+
     ~SyncLogger();
+
+    virtual void Prepare();
+
+    virtual void ClearUp();
 
 protected:
     virtual void DoLog(const LogRecord& record);
-    void BeforeLog();
-    void AfterLog();
-    void Rotate();
 
-    pthread_mutex_t lock_;
+    void BeforeLog();
+
+    void AfterLog();
+
+    void Rotate();
+    Lock lock_;
+    // pthread_mutex_t lock_;
     std::ofstream fstream_;
 };
 

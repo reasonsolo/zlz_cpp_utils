@@ -16,7 +16,6 @@ class WatcherThread: public Thread {
 public:
     virtual void Run() {
         while (count.Get() < kCountLimit) {
-            TRACE_LOG("start cond test1");
             DEBUG_LOG("watcher is going to sleep " << count.Get());
             Sleep();
             DEBUG_LOG("watcher is waken up " << count.Get());

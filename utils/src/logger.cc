@@ -64,7 +64,6 @@ Logger* Logger::GetLogger(const string& log_name) {
     {
         ScopedWriteLock lock(&loggers_lock_);
         Logger* logger = Create(default_logger_type_, log_name, kDefaultRotationSize);
-        TRACE_LOG("create logger " << log_name << " " << logger);
         loggers_.insert(make_pair(log_name, logger));
         return logger;
     }
@@ -74,12 +73,12 @@ Logger* Logger::GetDefaultLogger() {
     if (!default_logger_) {
         ScopedMutex lock(&default_logger_lock_);
         if (!default_logger_) {
-            TRACE_LOG(SysUtils::GetProcShortName());
             default_logger_ = GetLogger(SysUtils::ReplaceSuffix(SysUtils::GetProcShortName(), log_suffix_));
             string path, name;
             FileUtils::GetDirectoryAndFile(__FILE__, path, name);
             if (default_logger_) {
                 default_logger_->set_path(path);
+                default_logger_->set_level(LogLevel::DEBUG);
             }
         }
     }
@@ -89,17 +88,15 @@ Logger* Logger::GetDefaultLogger() {
 
 string Logger::GetLogLevelString(LogLevel lvl) {
     static const char* kLvlStrings[] = {
-            "ALL",
+            "ALL  ",
             "TRACE",
             "DEBUG",
-            "INFO",
-            "WARN",
+            "INFO ",
+            "WARN ",
             "ERROR",
             "FATAL",
-            "OFF"
+            "OFF  "
     };
-    return "ALL";
-    TRACE_LOG("get lvl str "  << static_cast<uint32_t>(lvl) << kLvlStrings[static_cast<uint32_t>(lvl)]);
     return kLvlStrings[static_cast<uint32_t>(lvl)];
 }
 
