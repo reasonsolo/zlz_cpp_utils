@@ -5,7 +5,9 @@
 
 #include "poll_poller.h"
 #include "channel.h"
+#include "log.h"
 #include <sys/poll.h>
+
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
@@ -18,8 +20,9 @@ PollPoller::~PollPoller() {
 }
 
 int32_t PollPoller::Poll(int64_t wait_time, vector<Channel*>& active_channels) {
+    int32_t event_count = 0;
     if (fd_list_.size() > 0) {
-        int32_t event_count = ::poll(&(*fd_list_.begin()), fd_list_.size(), wait_time);
+        event_count = ::poll(&(*fd_list_.begin()), fd_list_.size(), wait_time);
         if (event_count > 0) {
             DEBUG_LOG(ToString() << " get " << event_count << " events");
             FillActiveChannel(event_count, active_channels);
@@ -27,6 +30,7 @@ int32_t PollPoller::Poll(int64_t wait_time, vector<Channel*>& active_channels) {
             DEBUG_LOG(ToString() << " nothing happend");
         }
     }
+    return event_count;
 }
 
 void PollPoller::FillActiveChannel(int32_t event_count, vector<Channel*>& active_channels) {

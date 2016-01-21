@@ -7,10 +7,12 @@
 
 #include "common.h"
 #include "callbacks.h"
+#include "zthread.h"
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
 class EventLoop;
+
 
 NO_COPY_CLASS(EventLoopThreadPool) {
 public:

@@ -3,6 +3,8 @@
 //
 
 #include "event_loop_thread_pool.h"
+#include "event_loop.h"
+#include "zthread.h"
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
@@ -12,7 +14,7 @@ EventLoopThreadPool::EventLoopThreadPool(uint32_t size):
 }
 
 EventLoopThreadPool::~EventLoopThreadPool() {
-    Clearup();
+    Destroy();
 }
 
 void EventLoopThreadPool::Init(const LoopInitCallback& init_cb) {
@@ -29,17 +31,17 @@ void EventLoopThreadPool::Init(const LoopInitCallback& init_cb) {
 }
 
 void EventLoopThreadPool::Destroy() {
-    for (auto thread: threads_) {
+    for (auto& thread: threads_) {
         thread->Stop();
         delete thread;
     }
-    for (auto loop: event_loops_) {
+    for (auto& loop: event_loops_) {
         delete loop;
     }
 }
 
 void EventLoopThreadPool::Start() {
-    for (auto thread: threads_) {
+    for (auto& thread: threads_) {
         thread->Start();
     }
 }

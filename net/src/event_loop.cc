@@ -7,6 +7,7 @@
 #include "channel.h"
 #include "poller.h"
 #include "time_utils.h"
+#include "log.h"
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
@@ -60,6 +61,10 @@ void EventLoop::Start() {
                 current_channel_->HandleEvent();
             }
         }
+        if (wait_time < 0) {
+            WARN_LOG(ToString() << " wait time is " << wait_time);
+        }
+
         current_channel_ = nullptr;
         HandleTimers();
     }
@@ -75,6 +80,7 @@ void EventLoop::WakeUp() {
 }
 
 void EventLoop::GetWakingUpSignal() {
+    DEBUG_LOG("wake up signal captured");
     wake_up_sensor_.GetSignal(1);
 }
 
@@ -136,11 +142,13 @@ void EventLoop::HandleTimers() {
             repeated.push_back(it->second);
         }
     }
-    if (!repeated.empty()) {
+    {
         ScopedWriteLock lock(&timer_queue_lock_);
         timer_queue_.erase(timer_queue_.begin(), end);
-        for (auto item: repeated) {
-            timer_queue_.insert(make_pair(item->when(), item));
+        if (!repeated.empty()) {
+            for (auto item: repeated) {
+                timer_queue_.insert(make_pair(item->when(), item));
+            }
         }
     }
 }

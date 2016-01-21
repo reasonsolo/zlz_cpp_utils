@@ -77,6 +77,7 @@ Logger* Logger::GetDefaultLogger() {
             string path, name;
             FileUtils::GetDirectoryAndFile(__FILE__, path, name);
             if (default_logger_) {
+                // FIXME: to debug, all default logs are in this src directory
                 default_logger_->set_path(path);
                 default_logger_->set_level(LogLevel::DEBUG);
             }

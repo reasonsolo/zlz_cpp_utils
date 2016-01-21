@@ -39,7 +39,7 @@ public:
 
     virtual void Start();
 
-    virtual void Stop(bool wait_stop);
+    virtual void Stop(bool wait_stop = false);
 
     /*
      * send a kill signal

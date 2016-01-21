@@ -11,10 +11,8 @@
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
-ZUTIL_NAMESPACE_USE;
-
 class PollPoller : public Poller {
-typedef std::vector<struct pollfd> PollFdList;
+    typedef std::vector<struct pollfd> PollFdList;
 public:
     PollPoller(EventLoop* loop);
 
@@ -27,14 +25,17 @@ public:
     void RemoveChannel(Channel* event);
 
     string ToString() const {
-        return StringUtils::ToString("poller@" , this);
+        return StringUtils::ToString("poller@", this);
     }
+
 private:
     void FillActiveChannel(int32_t event_count, vector<Channel*>& channels);
 
     PollFdList fd_list_;
 
 };
+
+ZUTIL_NAMESPACE_USE;
 
 ZUTIL_NET_NAMESPACE_END
 
