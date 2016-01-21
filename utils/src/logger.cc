@@ -15,9 +15,11 @@ string Logger::log_suffix_ = "log";
 LoggerType Logger::default_logger_type_ = LoggerType::kSync;
 pthread_rwlock_t Logger::loggers_lock_ = PTHREAD_RWLOCK_INITIALIZER;
 map<string, Logger*> Logger::loggers_;
+pthread_mutex_t Logger::default_logger_lock_ = PTHREAD_MUTEX_INITIALIZER;
+Logger* Logger::default_logger_ = NULL;
 
 Logger::Logger(const string& name, int32_t rotation_size) :
-        path_(), base_filename_(name + "." + log_suffix_), rotation_size_(rotation_size) {
+        path_(), base_filename_(name), rotation_size_(rotation_size) {
 
 }
 
@@ -25,7 +27,7 @@ Logger::~Logger() {
 
 }
 
-void Logger::Log(const LogLevel lvl, const char* file_name, const uint32_t line_num, std::ostringstream& ss) {
+void Logger::Log(LogLevel lvl, const char* file_name, const int32_t line_num, std::stringstream& ss) {
     LogRecord record(ss);
     record.level = lvl;
     record.line_num = line_num;
@@ -34,23 +36,24 @@ void Logger::Log(const LogLevel lvl, const char* file_name, const uint32_t line_
     DoLog(record);
 }
 
-void Logger::set_path(const string& path) {
-    path_ = path;
+bool Logger::IsLevelEnabled(LogLevel level) {
+    return level_ >= level;
 }
 
-Logger* Logger::Create(const LoggerType type, const string& log_name, uint32_t rotation_size) {
+Logger* Logger::Create(LoggerType type, const string& log_name, uint32_t rotation_size) {
     ScopedWriteLock lock(&loggers_lock_);
-    Logger* logger_;
+    Logger* logger_ = nullptr;
     switch (type) {
         case LoggerType::kAsync:
         case LoggerType::kSync:
         default:
             logger_ = new SyncLogger(log_name, rotation_size);
     }
-    return nullptr;
+    return logger_;
 }
 
 Logger* Logger::GetLogger(const string& log_name) {
+
     {
         ScopedReadLock lock(&loggers_lock_);
         auto it = loggers_.find(log_name);
@@ -61,6 +64,7 @@ Logger* Logger::GetLogger(const string& log_name) {
     {
         ScopedWriteLock lock(&loggers_lock_);
         Logger* logger = Create(default_logger_type_, log_name, kDefaultRotationSize);
+        TRACE_LOG("create logger " << log_name << " " << logger);
         loggers_.insert(make_pair(log_name, logger));
         return logger;
     }
@@ -68,16 +72,22 @@ Logger* Logger::GetLogger(const string& log_name) {
 
 Logger* Logger::GetDefaultLogger() {
     if (!default_logger_) {
-        ScopedWriteLock lock(&loggers_lock_);
+        ScopedMutex lock(&default_logger_lock_);
         if (!default_logger_) {
+            TRACE_LOG(SysUtils::GetProcShortName());
             default_logger_ = GetLogger(SysUtils::ReplaceSuffix(SysUtils::GetProcShortName(), log_suffix_));
+            string path, name;
+            FileUtils::GetDirectoryAndFile(__FILE__, path, name);
+            if (default_logger_) {
+                default_logger_->set_path(path);
+            }
         }
     }
     return default_logger_;
 }
 
 
-string GetLogLevelString(LogLevel lvl) {
+string Logger::GetLogLevelString(LogLevel lvl) {
     static const char* kLvlStrings[] = {
             "ALL",
             "TRACE",
@@ -88,7 +98,8 @@ string GetLogLevelString(LogLevel lvl) {
             "FATAL",
             "OFF"
     };
-
+    return "ALL";
+    TRACE_LOG("get lvl str "  << static_cast<uint32_t>(lvl) << kLvlStrings[static_cast<uint32_t>(lvl)]);
     return kLvlStrings[static_cast<uint32_t>(lvl)];
 }
 

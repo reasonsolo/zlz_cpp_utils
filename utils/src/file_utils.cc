@@ -30,7 +30,7 @@ void FileUtils::GetDirectoryAndFile(const string& path, string& dirname, string&
         dirname = "";
     } else {
         dirname = path.substr(0, slash_pos);
-        filename = path.substr(slash_pos + 1, path.size() - slash_pos - 1);
+        filename = path.substr(slash_pos + 1);
     }
 }
 

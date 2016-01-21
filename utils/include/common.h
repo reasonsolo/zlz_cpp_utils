@@ -35,7 +35,7 @@ using std::make_pair;
 
 // use following macros before logger module is available
 #define TRACE_LOG(x) std::cerr << x << std::endl;
-#define DEBUG_LOG(x) std::cerr << x << std::endl;
+//#define DEBUG_LOG(x) std::cerr << x << std::endl;
 #define INFO_LOG(x)  std::cerr << x << std::endl;
 #define WARN_LOG(x)  std::cerr << x << std::endl;
 #define FATAL_LOG(x) std::cerr << x << std::endl;

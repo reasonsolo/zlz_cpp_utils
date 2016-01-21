@@ -8,8 +8,7 @@
 
 ZUTIL_NAMESPACE_BEGIN
 
-SyncLogger::SyncLogger(const string& name, uint32_t rotation_size) : base_filename_(name),
-                                                                     rotation_size_(rotation_size) {
+SyncLogger::SyncLogger(const string& name, uint32_t rotation_size) : Logger(name, rotation_size) {
 
 }
 
@@ -18,23 +17,24 @@ SyncLogger::~SyncLogger() {
 }
 
 void SyncLogger::DoLog(const LogRecord& record) {
+    TRACE_LOG("try to do log");
     ScopedMutex lock(&lock_);
     BeforeLog();
     if (fstream_.good()) {
-        fstream_ << "[" << GetLogLevelStr(level_) << "]"
+        fstream_ << "[" << Logger::GetLogLevelString(level_) << "]"
                  << TimeUtils::TimestampToString(record.timestamp) << " "
-                 << record.file_name << "-" << record.line_num << ": "
+                 << record.file_name << ":" << record.line_num << " "
                  << record.message.rdbuf() << std::endl;
         fstream_.flush();
-    } else {
-
     }
+    TRACE_LOG("log done");
     AfterLog();
 }
 
 void SyncLogger::BeforeLog() {
     if (!fstream_.is_open()) {
-        fstream_.open(GetCurrentFilename());
+        TRACE_LOG("current log dir " << GetCurrentFilename());
+        fstream_.open(GetCurrentFilename(), std::fstream::out | std::fstream::app);
         if (!fstream_.is_open()) {
             handle_sys_error("cannot open log file");
             return;

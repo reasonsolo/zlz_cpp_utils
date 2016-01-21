@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 #include "zthread.h"
 #include "atomic.h"
+#include "log.h"
 
 ZUTIL_NAMESPACE_USE;
 
@@ -15,6 +16,7 @@ class WatcherThread: public Thread {
 public:
     virtual void Run() {
         while (count.Get() < kCountLimit) {
+            TRACE_LOG("start cond test1");
             DEBUG_LOG("watcher is going to sleep " << count.Get());
             Sleep();
             DEBUG_LOG("watcher is waken up " << count.Get());
@@ -44,6 +46,7 @@ private:
 
 
 TEST(ThreadTest, CondTest) {
+    TRACE_LOG("start cond test");
     vector<Thread*> threads;
     Thread* watcher = new WatcherThread();
     watcher->Start();

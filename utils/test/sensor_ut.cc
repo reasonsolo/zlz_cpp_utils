@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 #include "zthread.h"
 #include "sensor.h"
+#include "log.h"
 
 //ZUTILS_NAMESPACE_USE;
 using namespace zutil;

@@ -28,9 +28,9 @@ struct LogRecord {
     string file_name;
     uint32_t line_num;
     int64_t timestamp;
-    std::ostringstream& message;
+    std::stringstream& message;
 
-    LogRecord(std::ostringstream& ss) : message(ss) {
+    LogRecord(std::stringstream& ss) : message(ss) {
 
     }
 };
@@ -61,17 +61,17 @@ public:
         level_ = level;
     }
 
-    bool IsLevelEnabeld(const LoggerType type) const;
+    bool IsLevelEnabled(LogLevel type);
 
-    virtual void Log(const LogLevel lvl, const char* file_name, const uint32_t line_num, std::ostringstream& ss);
+    virtual void Log(LogLevel lvl, const char* file_name, const int32_t line_num, std::stringstream& ss);
 
-    static Logger* Create(const LoggerType type, const string& log_name, uint32_t rotation_size);
+    static Logger* Create(LoggerType type, const string& log_name, uint32_t rotation_size);
 
     static Logger* GetLogger(const string& name);
 
     static Logger* GetDefaultLogger();
 
-    static string GetLogLevelStr(LogLevel lvl);
+    static string GetLogLevelString(LogLevel lvl);
 
     LogLevel level() const {
         return level_;
@@ -98,10 +98,10 @@ protected:
     static LoggerType           default_logger_type_;
     static pthread_rwlock_t     loggers_lock_;
     static map<string, Logger*> loggers_;
+    static pthread_mutex_t      default_logger_lock_;
     static Logger*              default_logger_;
 
 };
-
 
 
 ZUTIL_NAMESPACE_END

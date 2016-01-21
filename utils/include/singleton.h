@@ -39,7 +39,7 @@ private:
 };
 
 template <typename T>
-T* ThreadSingleton::instance_ = nullptr;
+T* ThreadSingleton<T>::instance_ = nullptr;
 
 
 

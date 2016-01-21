@@ -2,7 +2,7 @@
 // Created by zlz on 2016/1/11.
 //
 #include <sys/time.h>
-#include <w32api/_timeval.h>
+#include "log.h"
 #include "zthread.h"
 #include "string_utils.h"
 

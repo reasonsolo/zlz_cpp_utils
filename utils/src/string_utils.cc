@@ -3,6 +3,7 @@
 //
 
 #include "string_utils.h"
+#include "log.h"
 
 ZUTIL_NAMESPACE_BEGIN
 
