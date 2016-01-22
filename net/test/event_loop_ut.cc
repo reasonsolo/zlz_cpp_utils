@@ -22,8 +22,9 @@ void stop_loop(EventLoop* loop) {
 TEST(EventLoopTest, TimerTest) {
     EventLoop* loop = new EventLoop();
     int64_t time = TimeUtils::GetTickMS() + 5000;
+    loop->RunAfter(time - 10000, std::function<void()>(&print_hello));
     loop->RunAfter(time, std::function<void()>(&print_hello));
-    //loop->RunAfter(time, std::function<void()>(&print_hello));
+    loop->RunAfter(time, std::function<void()>(&print_hello));
     loop->RunAfter(time + 1000, std::bind(&stop_loop, loop));
     loop->Start();
     EXPECT_TRUE(1);

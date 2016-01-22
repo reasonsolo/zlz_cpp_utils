@@ -26,7 +26,7 @@ void TimerEvent::Run() {
 }
 
 bool TimerEvent::IsValid() const {
-    return when_ > TimeUtils::GetTickMS();
+    return when_ >= TimeUtils::GetTickMS();
 }
 
 

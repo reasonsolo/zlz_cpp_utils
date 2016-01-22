@@ -37,7 +37,7 @@ void Logger::Log(LogLevel lvl, const char* file_name, const int32_t line_num, st
 }
 
 bool Logger::IsLevelEnabled(LogLevel level) {
-    return level_ >= level;
+    return level_ <= level;
 }
 
 Logger* Logger::Create(LoggerType type, const string& log_name, uint32_t rotation_size) {

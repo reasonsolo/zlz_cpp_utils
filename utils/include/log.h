@@ -62,7 +62,7 @@ do { \
     if (!logger) { \
         std::cerr << x; \
     } else if (logger->IsLevelEnabled(LogLevel::ERROR)) { \
-         logger->Prepare();\
+        logger->Prepare();\
         stringstream ss; \
         ss << x; \
         logger->Log(LogLevel::ERROR, __FILE__, __LINE__, ss); \

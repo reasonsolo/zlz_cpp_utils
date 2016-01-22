@@ -14,6 +14,12 @@ ZUTIL_NET_NAMESPACE_BEGIN
 class Poller;
 class Channel;
 
+enum class EventLoopState {
+    kInit,
+    kRunning,
+    kStopped
+};
+
 NO_COPY_CLASS(EventLoop) {
     typedef std::multimap<int64_t, TimerEvent*> TimerQueue;
 public:
@@ -73,6 +79,7 @@ private:
     int64_t next_wake_up_;
     volatile bool stop_;
     volatile bool waiting_;
+    EventLoopState state_;
 
     Channel* current_channel_;
     // TODO: use shared_ptr

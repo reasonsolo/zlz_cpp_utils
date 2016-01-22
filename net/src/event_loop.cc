@@ -21,8 +21,10 @@ EventLoop::EventLoop() :
         poller_(Poller::GetDefaultPoller(this)),
         thread_id_(Thread::GetThreadId()),
         loop_count_(0),
+        next_wake_up_(0),
         stop_(false),
         waiting_(false),
+        state_(EventLoopState::kInit),
         current_channel_(nullptr),
         wake_up_channel_(nullptr),
         wake_up_sensor_() {
@@ -44,7 +46,8 @@ EventLoop* EventLoop::GetThreadLoop() {
 }
 
 void EventLoop::Start() {
-    DEBUG_LOG(ToString() << " starting");
+    DEBUG_LOG(ToString() << " is starting");
+    state_ = EventLoopState::kRunning;
     while (!stop_) {
         loop_count_++;
         active_channels_.clear();
@@ -56,7 +59,7 @@ void EventLoop::Start() {
             int32_t active_count = poller_->Poll(wait_time, active_channels_);
             DEBUG_LOG(ToString() << " poll due " << TimeUtils::GetTickMS()
                       << " get event num " << active_count);
-            for (auto channel: active_channels_) {
+            for (auto& channel: active_channels_) {
                 current_channel_ = channel;
                 current_channel_->HandleEvent();
             }
@@ -68,6 +71,8 @@ void EventLoop::Start() {
         current_channel_ = nullptr;
         HandleTimers();
     }
+    state_ = EventLoopState::kStopped;
+    DEBUG_LOG(ToString() << " is stopped");
 }
 
 void EventLoop::Stop() {
@@ -76,6 +81,7 @@ void EventLoop::Stop() {
 }
 
 void EventLoop::WakeUp() {
+    DEBUG_LOG("wake up sensor");
     wake_up_sensor_.Notify();
 }
 
@@ -85,15 +91,15 @@ void EventLoop::GetWakingUpSignal() {
 }
 
 void EventLoop::AddTimer(TimerEvent* event) {
-    {
+    if (event->IsValid()) {
         ScopedWriteLock lock(&timer_queue_lock_);
-        if (event->IsValid()) {
-            DEBUG_LOG(ToString() << " inserting timer event " << event->Tostring());
-            timer_queue_.insert(make_pair(event->when(), event));
+        DEBUG_LOG(ToString() << " inserting timer event " << event->Tostring());
+        timer_queue_.insert(make_pair(event->when(), event));
+        if (state_ == EventLoopState::kRunning && event->when() < next_wake_up_) {
+            WakeUp();
         }
-    }
-    if (event->when() < next_wake_up_) {
-        WakeUp();
+    } else {
+        WARN_LOG(ToString() << " finds " << event->Tostring() << " is invalid, ignore this timer");
     }
 }
 
@@ -146,7 +152,7 @@ void EventLoop::HandleTimers() {
         ScopedWriteLock lock(&timer_queue_lock_);
         timer_queue_.erase(timer_queue_.begin(), end);
         if (!repeated.empty()) {
-            for (auto item: repeated) {
+            for (auto& item: repeated) {
                 timer_queue_.insert(make_pair(item->when(), item));
             }
         }
