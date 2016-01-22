@@ -52,13 +52,15 @@ void EventLoop::Start() {
         loop_count_++;
         active_channels_.clear();
         int64_t now = TimeUtils::GetTickMS();
-        int64_t wait_time = GetNextLoopWaitTime() - now;
-        next_wake_up_ = TimeUtils::GetTickMS() + wait_time;
+        int64_t due_time = GetPollerDueTime(now);
+        int64_t wait_time = due_time - now;
+        next_wake_up_ = due_time;
         DEBUG_LOG(ToString() << " waiting time " << wait_time << " now " << now);
         if (wait_time > 0) {
             int32_t active_count = poller_->Poll(wait_time, active_channels_);
             DEBUG_LOG(ToString() << " poll due " << TimeUtils::GetTickMS()
-                      << " get event num " << active_count);
+                      << " get event num " << active_count
+                      << " channels size " << active_channels_.size());
             for (auto& channel: active_channels_) {
                 current_channel_ = channel;
                 current_channel_->HandleEvent();
@@ -69,20 +71,25 @@ void EventLoop::Start() {
         }
 
         current_channel_ = nullptr;
-        HandleTimers();
+        HandleTimers(due_time);
     }
     state_ = EventLoopState::kStopped;
     DEBUG_LOG(ToString() << " is stopped");
 }
 
 void EventLoop::Stop() {
+    DEBUG_LOG(ToString() << " is stopping");
     stop_ = true;
     WakeUp();
 }
 
 void EventLoop::WakeUp() {
-    DEBUG_LOG("wake up sensor");
-    wake_up_sensor_.Notify();
+    if (state_ == EventLoopState::kRunning) {
+        DEBUG_LOG("wake up sensor");
+        wake_up_sensor_.Notify();
+    } else {
+        DEBUG_LOG("event loop is not running, do not wake up");
+    }
 }
 
 void EventLoop::GetWakingUpSignal() {
@@ -95,7 +102,7 @@ void EventLoop::AddTimer(TimerEvent* event) {
         ScopedWriteLock lock(&timer_queue_lock_);
         DEBUG_LOG(ToString() << " inserting timer event " << event->Tostring());
         timer_queue_.insert(make_pair(event->when(), event));
-        if (state_ == EventLoopState::kRunning && event->when() < next_wake_up_) {
+        if (event->when() < next_wake_up_) {
             WakeUp();
         }
     } else {
@@ -119,35 +126,38 @@ void EventLoop::RemoveTimer(TimerEvent* event) {
     }
 }
 
-int64_t EventLoop::GetNextLoopWaitTime() {
+int64_t EventLoop::GetPollerDueTime(const int64_t now) {
     {
         ScopedReadLock lock(&timer_queue_lock_);
         if (!timer_queue_.empty()) {
             return timer_queue_.begin()->first;
         }
     }
-    return TimeUtils::GetTickMS() + poll_wait_time_;
+    return now + poll_wait_time_;
 }
 
-void EventLoop::HandleTimers() {
-    TimerQueue expired;
+void EventLoop::HandleTimers(const int64_t due_time) {
+    DEBUG_LOG(ToString() << " handle timers " << due_time);
     TimerQueue::iterator end;
+    vector<TimerEvent*> expired;
     vector<TimerEvent*> repeated;
     {
         ScopedReadLock lock(&timer_queue_lock_);
-        int64_t now = TimeUtils::GetTickMS();
-        end = timer_queue_.lower_bound(now);
-        assert(end == timer_queue_.end() || now < end->first);
+        end = timer_queue_.lower_bound(due_time + 1);
+        assert(end == timer_queue_.end() || due_time <= end->first);
         for (auto it = timer_queue_.begin(); it != end; it++) {
-            expired.insert(make_pair(it->first, it->second));
+            expired.push_back(it->second);
         }
     }
+    DEBUG_LOG(ToString() << " get " << expired.size() << " timers");
     for (auto it = expired.begin(); it != expired.end(); it++) {
-        it->second->Run();
-        if (it->second->interval() > 0) {
-            repeated.push_back(it->second);
+        DEBUG_LOG(ToString() << " due time " << due_time << " run timer " << (*it)->Tostring());
+        (*it)->Run();
+        if ((*it)->interval() > 0) {
+            repeated.push_back((*it));
         }
     }
+    DEBUG_LOG(ToString() << " all expired timers are finished");
     {
         ScopedWriteLock lock(&timer_queue_lock_);
         timer_queue_.erase(timer_queue_.begin(), end);

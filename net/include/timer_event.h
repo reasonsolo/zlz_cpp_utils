@@ -17,6 +17,8 @@ class TimerEvent {
 public:
     TimerEvent(const TimerCallback& cb, const int64_t when, const int32_t interval = 0);
 
+    TimerEvent(TimerCallback&& cb, const int64_t when, const int32_t interval = 0);
+
     virtual ~TimerEvent();
 
     virtual void Run();
@@ -42,7 +44,7 @@ public:
     }
 
 private:
-    const TimerCallback& callback_;
+    TimerCallback callback_;
     int64_t when_;
     int32_t interval_;
     uint64_t seq_;

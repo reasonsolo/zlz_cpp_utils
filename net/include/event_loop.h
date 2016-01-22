@@ -58,7 +58,6 @@ public:
         return loop_count_;
     }
 
-    int64_t GetNextLoopWaitTime();
 
     string ToString() const {
         return StringUtils::ToString("EventLoop@", this, ":", thread_id_);
@@ -66,11 +65,13 @@ public:
 
 private:
 
+    int64_t GetPollerDueTime(const int64_t now);
+
     void GetWakingUpSignal();
 
     void HandlePendings();
 
-    void HandleTimers();
+    void HandleTimers(const int64_t due_time);
 
     Poller* poller_;
     const pthread_t thread_id_;

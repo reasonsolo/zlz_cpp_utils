@@ -4,6 +4,7 @@
 
 #include "timer_event.h"
 #include "time_utils.h"
+#include "log.h"
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
@@ -14,12 +15,23 @@ TimerEvent::TimerEvent(const TimerCallback& cb, const int64_t when, const int32_
 
 }
 
+TimerEvent::TimerEvent(TimerCallback&& cb, const int64_t when, const int32_t interval) :
+        callback_(std::move(cb)), when_(when), interval_(interval), seq_(seq_counter_.Incr()) {
+
+}
+
 TimerEvent::~TimerEvent() {
 
 }
 
 void TimerEvent::Run() {
-    callback_();
+    if (callback_) {
+        DEBUG_LOG(Tostring() << " run callback");
+        callback_();
+    } else {
+        WARN_LOG(Tostring() << " is an empty event");
+    }
+
     if (interval_ > 0) {
         when_ += interval_;
     }
