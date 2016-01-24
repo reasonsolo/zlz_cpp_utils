@@ -1,12 +1,12 @@
 //
 // Created by zlz on 2016/1/11.
 //
+// inspired by tanakh/cmdline: https://github.com/tanakh/cmdline
 
 #ifndef ZUTILS_ARGS_PARSER_H
 #define ZUTILS_ARGS_PARSER_H
 
 #include "common.h"
-#include "container_utils.h"
 
 ZUTIL_NAMESPACE_BEGIN
 
@@ -25,30 +25,24 @@ public:
     template<typename T, typename F>
     void Add(const string& key, const string& desc = "",
              const char abbev = 0, bool is_required = true,
-             T def = T(), F field = F()) {
-        if (args_.find(key) == args_.end()) {
-            ArgumentBase* arg = new ArgumentWithField<T, F>(key, desc, abbev, is_required, def, field);
-            ordered_args_.push_back(arg);
-            args_[key] = arg;
-        }
-    }
+             T def = T(), F field = F());
 
     template <typename T>
-    bool Get(const string& key, T& val) const {
-        auto it = args_.find(key);
-        if (it != args_.end()) {
-            ArgumentWithValue* arg = dynamic_cast<ArgumentWithValue*>(it->second);
-            return arg->GetValue(val);
-        }
-        return false;
-    }
+    bool Get(const string& key, T& val) const;
 
-    bool Parse(int32_t argc, char* argv[]) {
-        return false;
-    }
+    bool Parse(int32_t argc, const char* const argv[]);
 
+    string Usage() const;
+
+    string ToString() const {
+        return "ArgParser-" + prog_name_;
+    }
 
 private:
+    bool SplitByEq(const string& str, string& k, string& v);
+
+    bool SetKeyValue(const string& k, const string& v);
+
     string prog_name_;
     string description_;
     string prefix_char_;
@@ -115,6 +109,7 @@ struct OptionField {
 
 // an interface for templated class Argument
 class ArgumentBase {
+public:
     virtual bool is_set() const = 0;
 
     virtual bool is_required() const = 0;
@@ -127,7 +122,7 @@ class ArgumentBase {
 
     virtual string desc() const = 0;
 
-    virtual char abbev() const = 0;
+    virtual char abbrev() const = 0;
 
 };
 
@@ -183,7 +178,7 @@ public:
         return desc_;
     }
 
-    char abbev() const {
+    char abbrev() const {
         return abbev_;
     }
 
