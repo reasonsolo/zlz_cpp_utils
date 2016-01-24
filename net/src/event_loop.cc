@@ -100,13 +100,13 @@ void EventLoop::GetWakingUpSignal() {
 void EventLoop::AddTimer(TimerEvent* event) {
     if (event->IsValid()) {
         ScopedWriteLock lock(&timer_queue_lock_);
-        DEBUG_LOG(ToString() << " inserting timer event " << event->Tostring());
+        DEBUG_LOG(ToString() << " inserting timer event " << event->ToString());
         timer_queue_.insert(make_pair(event->when(), event));
         if (event->when() < next_wake_up_) {
             WakeUp();
         }
     } else {
-        WARN_LOG(ToString() << " finds " << event->Tostring() << " is invalid, ignore this timer");
+        WARN_LOG(ToString() << " finds " << event->ToString() << " is invalid, ignore this timer");
     }
 }
 
@@ -114,11 +114,11 @@ void EventLoop::RemoveTimer(TimerEvent* event) {
     ScopedWriteLock lock(&timer_queue_lock_);
     auto range_it = timer_queue_.equal_range(event->when());
     if (range_it.first == timer_queue_.end() && range_it.second == timer_queue_.end()) {
-        DEBUG_LOG("cannot find any timer event in loop " << event->Tostring());
+        DEBUG_LOG("cannot find any timer event in loop " << event->ToString());
     } else {
         for (auto it = range_it.first; it != range_it.second; it++) {
             if (it->second == event) {
-                DEBUG_LOG("get a matching event " << event->Tostring());
+                DEBUG_LOG("get a matching event " << event->ToString());
                 timer_queue_.erase(it);
                 break;
             }
@@ -151,7 +151,7 @@ void EventLoop::HandleTimers(const int64_t due_time) {
     }
     DEBUG_LOG(ToString() << " get " << expired.size() << " timers");
     for (auto it = expired.begin(); it != expired.end(); it++) {
-        DEBUG_LOG(ToString() << " due time " << due_time << " run timer " << (*it)->Tostring());
+        DEBUG_LOG(ToString() << " due time " << due_time << " run timer " << (*it)->ToString());
         (*it)->Run();
         if ((*it)->interval() > 0) {
             repeated.push_back((*it));

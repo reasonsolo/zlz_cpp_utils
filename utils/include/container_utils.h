@@ -76,6 +76,7 @@ public:
     static bool Contains(const Container& container, const T& x) {
         return std::find(container.begin(), container.end(), x) != container.end();
     };
+
 };
 
 

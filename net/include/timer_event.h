@@ -39,7 +39,7 @@ public:
         return seq_;
     }
 
-    string Tostring() const {
+    string ToString() const {
         return StringUtils::ToString("TimerEvent@", this, ":", when());
     }
 

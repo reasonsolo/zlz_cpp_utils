@@ -26,10 +26,10 @@ TimerEvent::~TimerEvent() {
 
 void TimerEvent::Run() {
     if (callback_) {
-        DEBUG_LOG(Tostring() << " run callback");
+        DEBUG_LOG(ToString() << " run callback");
         callback_();
     } else {
-        WARN_LOG(Tostring() << " is an empty event");
+        WARN_LOG(ToString() << " is an empty event");
     }
 
     if (interval_ > 0) {

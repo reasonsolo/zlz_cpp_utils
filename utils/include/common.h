@@ -60,12 +60,23 @@ To implict_cast(const From& from) {
     return from;
 }
 
+template<typename To, typename From>
+To lexical_cast(const From& from) {
+    stringstream ss;
+    To to;
+    ss << from;
+    ss >> to;
+    return to;
+};
+
 class NoCopy {
 public:
-    NoCopy() {}
+    NoCopy() { }
+
 private:
     // forbidden
     NoCopy(const NoCopy& ncpy);
+
     NoCopy& operator=(const NoCopy& ncpy);
 };
 
