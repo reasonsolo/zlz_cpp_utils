@@ -7,30 +7,12 @@
 #define ZUTILS_ARGS_PARSER_H
 
 #include "common.h"
-#include "log.h"
 #include "string_utils.h"
 #include "sys_utils.h"
-#include <set>
-#include <typeinfo>
+#include "type_utils.h"
+
 
 ZUTIL_NAMESPACE_BEGIN
-
-template<typename T>
-string get_typename(const T& t) {
-    // use typeid but avoid rtti
-    // demangle in libstdc++ converts a type name to a human-readable name
-    int32_t status = 0;
-    char* p = abi::__cxa_demangle(typeid(t).name(), 0, 0, &status);
-    std::string ret(p);
-    free(p);
-    return ret;
-}
-
-template<>
-string get_typename(const string& t) {
-    // template specialization: rtti will give ugly answer
-    return "string";
-}
 
 /*
  * a lexical cast with stringstream
@@ -47,7 +29,7 @@ struct SimpleField {
     }
 
     string ToString() const {
-        return get_typename(t);
+        return TypeUtils::GetTypename(t);
     }
 
     T t;
@@ -339,13 +321,10 @@ public:
              const char abbrev = 0, bool is_required = true,
              const std::function<void(string&, T&)>& cb = nullptr, F field = F()) {
         if (args_.find(key) == args_.end()) {
-            DEBUG_LOG(ToString() << " add key " << key);
             ArgumentBase* arg = new ArgumentWithField<T, F>(key, desc, def, abbrev, is_required, field, cb);
             ordered_args_.push_back(arg);
             args_[key] = arg;
             return true;
-        } else {
-            WARN_LOG(ToString() << " cannot add duplicate arg key " << key);
         }
         return false;
     }
@@ -360,13 +339,10 @@ public:
     bool Add(const string& key, const string& desc = "",
              const char abbev = 0, bool is_required = true, const std::function<void()>& cb = nullptr) {
         if (args_.find(key) == args_.end()) {
-            DEBUG_LOG(ToString() << " add non-value key " << key);
             ArgumentBase* arg = new ArgumentWithCallback(key, desc, abbev, is_required, cb);
             ordered_args_.push_back(arg);
             args_[key] = arg;
             return true;
-        } else {
-            WARN_LOG(ToString() << " cannot add duplicate arg key " << key);
         }
         return false;
     }
@@ -374,14 +350,8 @@ public:
     template<typename T>
     bool Get(const string& key, T& val) {
         ArgumentBase* arg = args_[key];
-        if (arg) {
-            if (arg->is_set() && arg->need_value()) {
-                return dynamic_cast<ArgumentWithValue<T>*>(arg)->get(val);
-            } else {
-                WARN_LOG(ToString() << " arg key " << key << " is not set");
-            }
-        } else {
-            WARN_LOG(ToString() << " cannot get arg key " << key);
+        if (arg && arg->is_set() && arg->need_value()) {
+            return dynamic_cast<ArgumentWithValue<T>*>(arg)->get(val);
         }
         return false;
     }
@@ -390,8 +360,6 @@ public:
         ArgumentBase* arg = args_[key];
         if (arg) {
             return arg->is_set();
-        } else {
-            WARN_LOG(ToString() << " cannot get arg key " << key);
         }
         return false;
     }
@@ -402,7 +370,6 @@ public:
         }
         if (prog_name_.empty()) {
             prog_name_ = argv[0];
-            DEBUG_LOG(ToString() << " set prog name");
         }
         err_msgs_.clear();
         rest_args_.clear();
@@ -416,8 +383,6 @@ public:
             char abbrev = kv.second->abbrev();
             assert(kv.first == kv.second->key());
             if (abbrev_key_map.find(abbrev) != abbrev_key_map.end()) {
-                ERROR_LOG(ToString() << " find ambiguous abbreviation " << abbrev
-                          << " for " << kv.first);
                 return false;
             }
             abbrev_key_map[abbrev] = kv.second->key();
@@ -431,16 +396,13 @@ public:
                 if (SplitByEq(string(argv[i] + 2), k, v)) {
                     parse_success = SetKeyValue(k, v);
                 } else {
-                    ERROR_LOG(ToString() << " cannot parse argv " << argv[i]);
                     continue;
                 }
-                DEBUG_LOG(ToString() << " get k-v " << k << "-" << v);
             } else if (strncmp(argv[i], "-", 1) == 0) {
                 // "-" format
                 if (argv[i][1] != 0) {
                     string k, v;
                     if (abbrev_key_map.find(argv[i][1]) == abbrev_key_map.end()) {
-                        WARN_LOG(ToString() << " cannot find arg abbrev " << argv[i]);
                         continue;
                     }
                     k = abbrev_key_map[argv[i][1]];
@@ -448,10 +410,7 @@ public:
                     if (i + 1 < argc && argv[i + 1][0] != '-') {
                         v = argv[++i];
                     }
-                    DEBUG_LOG(ToString() << " get abbrev k-v " << k << "-" << v);
                     parse_success = SetKeyValue(k, v);
-                } else {
-                    ERROR_LOG(ToString() << " cannot parse argv " << argv[i]);
                 }
             } else {
                 rest_args_.push_back(argv[i]);
@@ -502,7 +461,6 @@ public:
                 if (it.second->is_required() && input_args_.find(it.first) == input_args_.end()) {
                     err_msgs_.push_back(StringUtils::ToString(it.first, " error: required but missing"));
                 }
-                ERROR_LOG(ToString() << " key " << it.first << " is invalid");
                 return false;
             }
         }
@@ -542,11 +500,6 @@ private:
                 ArgumentWithCallback* arg_with_cb = dynamic_cast<ArgumentWithCallback*>(arg);
                 arg_with_cb->set();
             }
-        } else {
-            WARN_LOG(ToString() << " cannot find arg key " << k);
-        }
-        if (!success) {
-            ERROR_LOG(ToString() << " key-value: " << k << "-" << v << " is not valid");
         }
         return success;
     }

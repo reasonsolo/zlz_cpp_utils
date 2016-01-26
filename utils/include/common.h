@@ -20,6 +20,7 @@
 #include <cstdio>
 #include <unistd.h>
 #include <functional>
+#include <set>
 
 /*
  * you should never name a class duplicating the one in STL
@@ -28,6 +29,7 @@ using std::list;
 using std::stringstream;
 using std::string;
 using std::vector;
+using std::set;
 using std::map;
 using std::pair;
 using std::make_pair;

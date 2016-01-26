@@ -20,7 +20,6 @@ public:
 
     void Signal();
 
-
 private:
     pthread_cond_t cond_;
 };
@@ -40,6 +39,10 @@ public:
     virtual void Start();
 
     virtual void Stop(bool wait_stop = false);
+
+    virtual bool IsRunning() {
+        return state_ != kStopped;
+    }
 
     /*
      * send a kill signal
