@@ -32,7 +32,7 @@ public:
     }
     virtual void Run() {
         for (int32_t i = 0; i < kCountLimit; i++) {
-            if (count.Get() == kCountLimit) {
+            if (count.Get() >= kCountLimit) {
                 watcher_->Wakeup();
             }
             DEBUG_LOG("incr count " << count.Incr());

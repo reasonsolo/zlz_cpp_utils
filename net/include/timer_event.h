@@ -25,8 +25,6 @@ public:
 
     bool IsValid() const;
 
-    bool Expired() const;
-
     int32_t interval() const {
         return interval_;
     }
