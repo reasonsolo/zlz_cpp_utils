@@ -3,7 +3,6 @@
 //
 
 #include "ini_parser.h"
-#include <functional>
 
 ZUTIL_NAMESPACE_BEGIN
 

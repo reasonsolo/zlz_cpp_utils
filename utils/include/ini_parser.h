@@ -19,7 +19,7 @@ public:
      * check_interval: in seconds, if > 0, the check thread will
      * periodically check and reload the ini file
      */
-    IniParser(const string& filename, bool case_sensitive = false, int32_t check_interval = 0, );
+    IniParser(const string& filename, bool case_sensitive = false, int32_t check_interval = 0);
 
     ~IniParser();
 

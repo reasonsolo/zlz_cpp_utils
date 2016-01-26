@@ -4,11 +4,8 @@
 
 #include <gtest/gtest.h>
 #include "file_utils.h"
-#include "time_utils.h"
-#include "common.h"
 
 ZUTIL_NAMESPACE_USE;
-
 
 TEST(FileUtilsTest, DirnameTest) {
     string dir, file;

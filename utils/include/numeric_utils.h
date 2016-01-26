@@ -21,9 +21,9 @@ public:
 
     static bool String2Double(const string& str, double& v);
 
-    static bool Int322String(const int32_t v, string& str);
+    static string Int322String(const int32_t v);
 
-    static bool Double2String(const double v, string& str);
+    static string Double2String(const double v);
 };
 
 ZUTIL_NAMESPACE_END

@@ -3,7 +3,6 @@
 //
 
 #include "sys_utils.h"
-#include <errno.h>
 
 ZUTIL_NAMESPACE_BEGIN
 

@@ -119,7 +119,7 @@ class ArgumentBase {
 public:
     ArgumentBase(const string& key, const string& desc,
                  const char abbrev = '\0', bool is_required = true) :
-        key_(key), desc_(desc), abbrev_(abbrev), is_required_(is_required), is_set_(false) {
+            key_(key), desc_(desc), abbrev_(abbrev), is_required_(is_required), is_set_(false) {
 
     }
 
@@ -136,7 +136,7 @@ public:
     }
 
     virtual bool is_valid() const {
-        return is_required_ ? is_set_ : true;
+        return !is_required_ || is_set_;
     }
 
     virtual string default_str() const {
@@ -183,7 +183,7 @@ public:
     virtual string ToFullString() const {
         stringstream ss;
         ss << (is_required_ ? "required" : "optional") << ": " << ToBasicString();
-        ss  << "\t" << desc_;
+        ss << "\t" << desc_;
         return ss.str();
     }
 
@@ -200,7 +200,7 @@ class ArgumentWithValue : public ArgumentBase {
 public:
     ArgumentWithValue(const string& key, const string& desc, const T& def,
                       const char abbrev = '\0', bool is_required = true) :
-        ArgumentBase(key, desc, abbrev, is_required), def_(def) {
+            ArgumentBase(key, desc, abbrev, is_required), def_(def) {
 
     }
 
@@ -219,7 +219,7 @@ public:
     }
 
     bool is_valid() const {
-        return is_required() ? is_set() : true;
+        return !this->is_required_ || this->is_set_;
     }
 
 protected:
@@ -233,7 +233,7 @@ public:
     ArgumentWithCallback(const string& key, const string& desc,
                          const char abbrev = '\0', bool is_required = true,
                          const std::function<void()>& callback = nullptr) :
-        ArgumentBase(key, desc, abbrev, is_required), callback_(callback) {
+            ArgumentBase(key, desc, abbrev, is_required), callback_(callback) {
 
     }
 
@@ -257,7 +257,7 @@ public:
     ArgumentWithField(const string& key, const string& desc, const T& def, const char abbrev = '\0',
                       bool is_required = true, F field = F(),
                       const std::function<void(string&, T&)>& callback = nullptr) :
-        ArgumentWithValue<T>(key, desc, def, abbrev, is_required), field_(field), set_callback_(callback) {
+            ArgumentWithValue<T>(key, desc, def, abbrev, is_required), field_(field), set_callback_(callback) {
 
     };
 
@@ -289,7 +289,7 @@ public:
 
     virtual string ToFullString() const {
         stringstream ss;
-        ss  << (this->is_required_ ? "required" : "optional") << ": " << "--" << this->key_;
+        ss << (this->is_required_ ? "required" : "optional") << ": " << "--" << this->key_;
         if (this->abbrev_ > 0) {
             ss << "|" << "-" << this->abbrev_;
         }
@@ -305,7 +305,7 @@ protected:
 
 class ArgParser {
 public:
-    ArgParser(const string& desc = ""): desc_(desc) {
+    ArgParser(const string& desc = "") : desc_(desc) {
         prog_name_ = SysUtils::GetProcShortName();
         assert(Add("help", "print usage message", 'h', false, std::bind(PrintUsage, this)));
     }
@@ -434,7 +434,7 @@ public:
         for (auto& arg: argv) {
             char_argv.push_back(arg.c_str());
         }
-        return CheckAndParse(char_argv.size(), &char_argv[0]);
+        return CheckAndParse(static_cast<int32_t>(char_argv.size()), &char_argv[0]);
     }
 
     string Usage() const {
@@ -475,7 +475,7 @@ public:
     }
 
 private:
-    bool SplitByEq(const string& str, string& k, string& v) {
+    void SplitByEq(const string& str, string& k, string& v) {
         string::size_type eq_pos = str.find_first_of('=');
         if (eq_pos != string::npos) {
             k = str.substr(0, eq_pos);

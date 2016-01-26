@@ -49,7 +49,7 @@ public:
         char signals[1024];
         int32_t readed;
         while (signal > 0) {
-            if (readed = read(fds_[0], reinterpret_cast<void*>(signals), signal)) {
+            if ((readed = read(fds_[0], reinterpret_cast<void*>(signals), signal))) {
                 if (EINTR == errno) {
                     continue;
                 }

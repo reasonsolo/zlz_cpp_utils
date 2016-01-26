@@ -26,7 +26,7 @@ enum class LogLevel {
 struct LogRecord {
     LogLevel level;
     string file_name;
-    uint32_t line_num;
+    int32_t line_num;
     int64_t timestamp;
     std::stringstream& message;
 

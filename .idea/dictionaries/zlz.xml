@@ -2,6 +2,7 @@
   <dictionary name="zlz">
     <words>
       <w>iteratable</w>
+      <w>poller</w>
       <w>stringstream</w>
     </words>
   </dictionary>

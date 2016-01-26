@@ -67,7 +67,7 @@ public:
      * do not expose this value to user
      */
     static uint64_t GetTickMS() {
-        static uint32_t khz = getCpuKhz();
+        static uint64_t khz = getCpuKhz();
         return Counter() / khz;
     }
 

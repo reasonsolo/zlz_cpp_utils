@@ -7,33 +7,40 @@
       <sourceFolder url="file://$MODULE_DIR$/lib/googletest/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/googletest/cmake/internal_utils.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/src/lock.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/event_loop_thread_pool.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/event_loop.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/net_utils.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/poll_poller.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/poller.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/channel.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/timer_event.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/test/event_loop_ut.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/test/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/src/file_utils.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/src/numeric_utils.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/utils/src/zthread.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/src/lock.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/src/string_utils.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/src/sync_logger.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/src/sys_utils.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/src/logger.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/src/ini_parser.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/utils/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/logger.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/common.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/zthread.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/args_parser.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/zfile.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/histogram.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/ini_parser.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/buffer.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/string_utils.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/lock.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/zlog.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/array.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/simple_log.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/container_utils.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/ztime.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/numric_utils.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/include/file_utils.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/test/file_ut.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/test/string_utils_ut.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/utils/test/container_utils_ut.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/test/arg_parser_ut.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/test/thread_ut.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/test/sensor_ut.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/utils/test/CMakeLists.txt" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
       <library name="Header Search Paths">
         <CLASSES>
           <root url="file://$MODULE_DIR$/lib/googletest/include" />
+          <root url="file://$MODULE_DIR$/net/include" />
           <root url="file://$MODULE_DIR$/utils/include" />
           <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include" />
           <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include-fixed" />
@@ -41,30 +48,12 @@
         </CLASSES>
         <SOURCES>
           <root url="file://$MODULE_DIR$/lib/googletest/include" />
+          <root url="file://$MODULE_DIR$/net/include" />
           <root url="file://$MODULE_DIR$/utils/include" />
           <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include" />
           <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include-fixed" />
           <root url="file://C:/cygwin64/usr/include" />
         </SOURCES>
-        <excluded>
-          <root url="file://$MODULE_DIR$/utils/include/logger.h" />
-          <root url="file://$MODULE_DIR$/utils/include/common.h" />
-          <root url="file://$MODULE_DIR$/utils/include/zthread.h" />
-          <root url="file://$MODULE_DIR$/utils/include/args_parser.h" />
-          <root url="file://$MODULE_DIR$/utils/include/zfile.h" />
-          <root url="file://$MODULE_DIR$/utils/include/histogram.h" />
-          <root url="file://$MODULE_DIR$/utils/include/ini_parser.h" />
-          <root url="file://$MODULE_DIR$/utils/include/buffer.h" />
-          <root url="file://$MODULE_DIR$/utils/include/string_utils.h" />
-          <root url="file://$MODULE_DIR$/utils/include/lock.h" />
-          <root url="file://$MODULE_DIR$/utils/include/zlog.h" />
-          <root url="file://$MODULE_DIR$/utils/include/array.h" />
-          <root url="file://$MODULE_DIR$/utils/include/simple_log.h" />
-          <root url="file://$MODULE_DIR$/utils/include/container_utils.h" />
-          <root url="file://$MODULE_DIR$/utils/include/ztime.h" />
-          <root url="file://$MODULE_DIR$/utils/include/numric_utils.h" />
-          <root url="file://$MODULE_DIR$/utils/include/file_utils.h" />
-        </excluded>
       </library>
     </orderEntry>
   </component>
