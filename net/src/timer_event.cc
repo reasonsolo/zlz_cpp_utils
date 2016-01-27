@@ -10,12 +10,12 @@ ZUTIL_NET_NAMESPACE_BEGIN
 
 AtomicU64 TimerEvent::seq_counter_(0);
 
-TimerEvent::TimerEvent(const TimerCallback& cb, const int64_t when, const int32_t interval) :
+TimerEvent::TimerEvent(const TimerCallback& cb, const uint64_t when, const int32_t interval) :
         callback_(cb), when_(when), interval_(interval), seq_(seq_counter_.Incr()) {
 
 }
 
-TimerEvent::TimerEvent(TimerCallback&& cb, const int64_t when, const int32_t interval) :
+TimerEvent::TimerEvent(TimerCallback&& cb, const uint64_t when, const int32_t interval) :
         callback_(std::move(cb)), when_(when), interval_(interval), seq_(seq_counter_.Incr()) {
 
 }

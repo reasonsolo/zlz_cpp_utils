@@ -22,17 +22,17 @@ void Channel::HandleEvent() {
             close_cb_();
         }
     }
-    if (revents_ & EV_ERROR) {
+    if ((revents_) & (EV_ERROR)) {
         if (error_cb_) {
             error_cb_();
         }
     }
-    if (revents_ & EV_READ) {
+    if ((revents_) & (EV_READ)) {
         if (read_cb_) {
             read_cb_();
         }
     }
-    if (revents_ & EV_WRITE) {
+    if ((revents_) & (EV_WRITE)) {
         if (write_cb_) {
             write_cb_();
         }

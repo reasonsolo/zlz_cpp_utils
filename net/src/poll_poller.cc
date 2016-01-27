@@ -75,7 +75,7 @@ void PollPoller::RemoveChannel(Channel* channel) {
     if (channels_.find(channel->fd()) != channels_.end()) {
         // remove fd carefully
         assert(channels_[channel->fd()] == channel);
-        assert(channel->index() > 0 && channel->index() < fd_list_.size());
+        assert(channel->index() > 0 && channel->index() < static_cast<int32_t>(fd_list_.size()));
 
         size_t index = channel->index();
         if (index != fd_list_.size() - 1) {

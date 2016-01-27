@@ -13,7 +13,7 @@ void set_fd_flags(int32_t fd, int32_t flag) {
 }
 
 bool has_fd_flags(int32_t fd, int32_t flag) {
-    return fcntl(fd, F_GETFL, 0) & flag == flag;
+    return (fcntl(fd, F_GETFL, 0) & flag) == flag;
 }
 
 

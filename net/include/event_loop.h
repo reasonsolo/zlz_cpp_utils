@@ -77,7 +77,7 @@ private:
     const pthread_t thread_id_;
 
     uint64_t loop_count_;
-    int64_t next_wake_up_;
+    uint64_t next_wake_up_;
     volatile bool stop_;
     volatile bool waiting_;
     EventLoopState state_;
@@ -87,8 +87,8 @@ private:
     vector<Channel*> active_channels_;
 
     int32_t wake_up_fd_;
-    Sensor wake_up_sensor_;
     Channel* wake_up_channel_;
+    Sensor wake_up_sensor_;
 
     pthread_rwlock_t timer_queue_lock_;
     TimerQueue timer_queue_;

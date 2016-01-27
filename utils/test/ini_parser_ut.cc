@@ -12,8 +12,6 @@ using namespace std;
 
 void ParseCb(IniParser* parser) {
     EXPECT_EQ(8080, parser->Get("server", "port", 111));
-    string value;
-    int32_t port;
     EXPECT_STREQ("async", parser->Get<string>("log", "type", "tmp").c_str());
     EXPECT_STREQ("http", parser->Get<string>("server", "type", "def").c_str());
     EXPECT_STREQ("http", parser->Get<string>("server", "tYPe", "def").c_str());
@@ -21,12 +19,12 @@ void ParseCb(IniParser* parser) {
     EXPECT_EQ(111, parser->Get("server", "port1", 111));
     vector<string> names;
     parser->GetSections(names);
-    EXPECT_EQ(2, names.size());
+    EXPECT_EQ(2u, names.size());
     EXPECT_TRUE(ContainerUtils::Contains(names, "log"));
     EXPECT_TRUE(ContainerUtils::Contains(names, "server"));
 
     parser->GetSectionKeys("server", names);
-    EXPECT_EQ(3, names.size());
+    EXPECT_EQ(3u, names.size());
     EXPECT_TRUE(ContainerUtils::Contains(names, "type"));
     EXPECT_TRUE(ContainerUtils::Contains(names, "port"));
     EXPECT_TRUE(ContainerUtils::Contains(names, "host"));
@@ -71,8 +69,6 @@ TEST(IniParserTest, ThreadTest) {
 
     IniParser parser(filename, false, 1);
     EXPECT_TRUE(parser.Parse());
-    string value;
-    int32_t port;
     EXPECT_STREQ("async", parser.Get<string>("log", "type", "tmp").c_str());
     EXPECT_STREQ("http", parser.Get<string>("server", "type", "def").c_str());
     EXPECT_STREQ("http", parser.Get<string>("server", "tYPe", "def").c_str());

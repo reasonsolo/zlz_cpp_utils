@@ -122,6 +122,9 @@ public:
             key_(key), desc_(desc), abbrev_(abbrev), is_required_(is_required), is_set_(false) {
 
     }
+    virtual ~ArgumentBase() {
+
+    }
 
     virtual bool is_set() const {
         return is_set_;
