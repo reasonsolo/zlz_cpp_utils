@@ -12,75 +12,46 @@
 
 ZUTIL_NAMESPACE_BEGIN
 
-class TypeUtils {
-public:
+template<typename T>
+string get_typename(const T& t) {
+    // use typeid but avoid rtti
+    // demangle in libstdc++ converts a type name to a human-readable name
+    int32_t status = 0;
+    char* p = abi::__cxa_demangle(typeid(t).name(), 0, 0, &status);
+    std::string ret(p);
+    free(p);
+    return ret;
+}
 
-    template<typename T>
-    static string GetTypename(const T& t) const {
-        // use typeid but avoid rtti
-        // demangle in libstdc++ converts a type name to a human-readable name
-        int32_t status = 0;
-        char* p = abi::__cxa_demangle(typeid(t).name(), 0, 0, &status);
-        std::string ret(p);
-        free(p);
-        return ret;
-    }
+/*
+ * cannot define a template specialization in headers
+ */
+template<>
+string get_typename(const string& t);
 
-    template<>
-    static string GetTypename(const string& t) const {
-        // template specialization: rtti will give ugly answer
-        return "string";
-    }
-
-    template<typename From, typename To>
-    static bool AnyCast(const From& from, To& to) {
-        stringstream ss;
-        return ss << from && ss >> to && ss.eof();
-    };
-
-    template<>
-    static bool AnyCast(const string& from, int32_t& to) {
-        return NumericUtils::String2Int32(from, to);
-    }
-
-    template<>
-    static bool AnyCast(const string& from, int64_t& to) {
-        return NumericUtils::String2Int64(from, to);
-    }
-
-    template<>
-    static bool AnyCast(const string& from, uint32_t& to) {
-        return NumericUtils::String2UInt32(from, to);
-    }
-
-    template<>
-    static bool AnyCast(const string& from, uint64_t& to) {
-        return NumericUtils::String2UInt64(from, to);
-    }
-
-    template<>
-    static bool AnyCast(const string& from, double& to) {
-        return NumericUtils::String2Double(from, to);
-    }
-
-    template<>
-    static bool AnyCast(const string& from, bool& to) {
-        int64_t tmp = 0;
-        if (NumericUtils::String2Int64(from, tmp)) {
-            to = implict_cast<bool>(tmp);
-            return true;
-        }
-        if (from == "true") {
-            to = true;
-            return true;
-        }
-        if (from == "false") {
-            to = false;
-            return true;
-        }
-        return false;
-    }
+template<typename From, typename To>
+bool AnyCast(const From& from, To& to) {
+    stringstream ss;
+    return ss << from && ss >> to && ss.eof();
 };
+
+template<>
+bool AnyCast(const string& from, int32_t& to);
+
+template<>
+bool AnyCast(const string& from, int64_t& to);
+
+template<>
+bool AnyCast(const string& from, uint32_t& to);
+
+template<>
+bool AnyCast(const string& from, uint64_t& to);
+
+template<>
+bool AnyCast(const string& from, double& to);
+
+template<>
+bool AnyCast(const string& from, bool& to);
 
 ZUTIL_NAMESPACE_END
 

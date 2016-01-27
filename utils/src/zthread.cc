@@ -148,7 +148,7 @@ void Thread::DoWakeup() {
 }
 
 void Thread::Sleep(int32_t time_ms) {
-    if (GetThreadId() == thread_id() && state_ == kRunning) {
+    if (state_ == kRunning) {
         ScopedMutex mutex(lock_);
         state_ = kSleeping;
         cond_.Wait(lock_, time_ms);

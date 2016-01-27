@@ -13,6 +13,7 @@
 ZUTIL_NAMESPACE_BEGIN
 
 class IniParser {
+    typedef map<string, string> Section;
     typedef std::function<void(IniParser*)> ParseCallback;
 public:
     /*
@@ -33,24 +34,52 @@ public:
     bool Parse();
 
     template<typename T>
-    T Get(const string& section, const string& name, const T& def) {
-        T tmp;
-        ScopedReadLock lock(&data_lock_);
-        auto it = data_.find(MakeKey(section, name));
-        if (it != data_.end() && TypeUtils::AnyCast<string, T>(it->second, tmp)) {
-            return tmp;
+    T Get(const string& section, const string& key, const T& def) {
+        if (data_) {
+            ScopedReadLock lock(&data_lock_);
+            string sec = section;
+            string k = key;
+            CaseTransform(k);
+            CaseTransform(sec);
+            auto sec_it = data_->find(sec);
+            if (sec_it != data_->end()) {
+                T tmp;
+                auto key_it = sec_it->second.find(k);
+                if (key_it != sec_it->second.end() && AnyCast<string, T>(key_it->second, tmp)) {
+                    return tmp;
+                }
+            }
         }
         return def;
     }
 
-private:
-    static void Update(IniParser* parser);
+    void GetSections(vector<string>& sections);
 
-    string MakeKey(const string& section, const string& name);
+    void GetSectionKeys(const string& name, vector<string>& keys);
+
+    /*
+     * TODO: dump data to file
+     */
+    bool Dump(const string& dump_filename);
+
+    void Stop();
+
+private:
+    static void Update(IniParser* self);
+
+    bool DoParse(map<string, Section>& data);
+
+    bool ParseLine(const string& line, string& key, string& val);
+
+    bool ParseSection(const string& line, string& section);
+
+    bool ParseComment(const string& line);
+
+    void CaseTransform(string& str);
 
     string filename_;
     bool case_sensitive_;
-    map<string, string> data_;
+    map<string, Section>* data_;
     vector<ParseCallback> callbacks_;
 
     pthread_rwlock_t data_lock_;

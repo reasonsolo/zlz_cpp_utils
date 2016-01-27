@@ -35,7 +35,12 @@ public:
     static size_t Split(const string& source, const string& delim, vector<string>& tokens, bool skip_empty = true);
 
     static size_t Split(const string& source, const string& delim, const string& val_delim,
-                      map<string, string>& tokens);
+                        map<string, string>& tokens);
+
+    /*
+     * split string once to 2 segments
+     */
+    static size_t Split(const string& source, const string& delim, string& first, string& second);
 
     static char* AsArray(string& str) {
         return &str[0];
@@ -44,6 +49,8 @@ public:
     static const char* AsArray(const string& str) {
         return &str[0];
     }
+
+    static string Trim(const string& str);
 
     /*
      * silly stringstream usage

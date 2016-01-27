@@ -52,5 +52,27 @@ size_t StringUtils::Split(const string& source, const string& delim, const strin
     return count;
 }
 
+size_t StringUtils::Split(const string& source, const string& delim, string& first, string& second) {
+    if (!delim.empty() && !source.empty()) {
+        string::size_type delim_pos = source.find(delim);
+        if (delim_pos != string::npos) {
+            first = source.substr(0, delim_pos);
+            second = source.substr(delim_pos + delim.size());
+            return 2;
+        }
+    }
+    first = source;
+    return 1;
+}
+
+string StringUtils::Trim(const string& str) {
+    char blank[] = " \t\r\n";
+    string::size_type begin = 0;
+    string::size_type end = str.size();
+    for (; begin < end && strchr(blank, str[begin]); ++begin) ;
+    for (; end >= 0 && strchr(blank, str[end]); --end) ;
+    return str.substr(begin, end - begin + 1);
+}
+
 
 ZUTIL_NAMESPACE_END

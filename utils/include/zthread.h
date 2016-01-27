@@ -44,6 +44,10 @@ public:
         return state_ != kStopped;
     }
 
+    virtual bool IsStopped() {
+        return stop_;
+    }
+
     /*
      * send a kill signal
      */
@@ -83,6 +87,8 @@ public:
      */
     void Wakeup();
 
+    void Sleep(int32_t time_ms = 0);
+
     string ToString() const;
 
 protected:
@@ -90,8 +96,6 @@ protected:
      * call in subclass itself
      */
     void DoWakeup();
-
-    void Sleep(int32_t time_ms = 0);
 
     /*
      * implement this method in sub-class

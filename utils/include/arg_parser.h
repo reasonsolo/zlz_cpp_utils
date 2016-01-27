@@ -29,7 +29,7 @@ struct SimpleField {
     }
 
     string ToString() const {
-        return TypeUtils::GetTypename(t);
+        return get_typename(t);
     }
 
     T t;
@@ -271,7 +271,7 @@ public:
 
     virtual bool set(const string& val, string& errmsg) {
         this->is_set_ = field_.set(val, this->val_, errmsg);
-        if (this->is_set_, set_callback_) {
+        if (this->is_set_ && set_callback_) {
             set_callback_(this->key_, this->val_);
         }
         return this->is_set_;
@@ -391,26 +391,21 @@ public:
         bool parse_success = true;
         for (int32_t i = 1; i < argc; i++) {
             // "--" format
+            string k, v;
             if (strncmp(argv[i], "--", 2) == 0) {
-                string k, v;
-                if (SplitByEq(string(argv[i] + 2), k, v)) {
-                    parse_success = SetKeyValue(k, v);
-                } else {
-                    continue;
-                }
+                SplitByEq(string(argv[i] + 2), k, v);
+                parse_success = SetKeyValue(k, v);
             } else if (strncmp(argv[i], "-", 1) == 0) {
                 // "-" format
                 if (argv[i][1] != 0) {
-                    string k, v;
-                    if (abbrev_key_map.find(argv[i][1]) == abbrev_key_map.end()) {
-                        continue;
+                    if (abbrev_key_map.find(argv[i][1]) != abbrev_key_map.end()) {
+                        k = abbrev_key_map[argv[i][1]];
+                        // get next argv as value, the value cannot startwith "-" or "--"
+                        if (i + 1 < argc && argv[i + 1][0] != '-') {
+                            v = argv[++i];
+                        }
+                        parse_success = SetKeyValue(k, v);
                     }
-                    k = abbrev_key_map[argv[i][1]];
-                    // get next argv as value, the value cannot startwith "-" or "--"
-                    if (i + 1 < argc && argv[i + 1][0] != '-') {
-                        v = argv[++i];
-                    }
-                    parse_success = SetKeyValue(k, v);
                 }
             } else {
                 rest_args_.push_back(argv[i]);
