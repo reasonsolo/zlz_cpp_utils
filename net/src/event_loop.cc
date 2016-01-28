@@ -1,3 +1,4 @@
+
 //
 // Created by zlz on 2016/1/14.
 //
@@ -33,6 +34,8 @@ EventLoop::EventLoop() :
     wake_up_channel_ = new Channel(this, wake_up_sensor_.read_fd());
     wake_up_channel_->set_read_cb(std::bind(&GetWakingUpSignal, this));
     wake_up_channel_->EnableRead();
+    pthread_rwlock_init(&timer_queue_lock_, nullptr);
+    pthread_mutex_init(&pending_queue_lock_, nullptr);
 }
 
 EventLoop::~EventLoop() {
@@ -51,9 +54,10 @@ void EventLoop::Start() {
     while (!stop_) {
         loop_count_++;
         active_channels_.clear();
+        // wait time can be negative, use signed type here
         int64_t now = TimeUtils::GetTickMS();
         int64_t due_time = GetPollerDueTime(now);
-        int64_t wait_time = due_time - now;
+        int64_t wait_time = static_cast<int64_t>(due_time) - now;
         next_wake_up_ = due_time;
         DEBUG_LOG(ToString() << " waiting time " << wait_time << " now " << now);
         if (wait_time > 0) {
@@ -72,6 +76,7 @@ void EventLoop::Start() {
 
         current_channel_ = nullptr;
         HandleTimers(due_time);
+        HandlePendings();
     }
     state_ = EventLoopState::kStopped;
     DEBUG_LOG(ToString() << " is stopped");
@@ -177,9 +182,41 @@ void EventLoop::RemoveChannel(Channel* channel) {
     poller_->RemoveChannel(channel);
 }
 
-void EventLoop::RunAfter(int64_t time, const EventCallBack& cb) {
+void EventLoop::RunAt(const EventCallBack& cb, int64_t time) {
     TimerEvent* event = new TimerEvent(cb, time);
     AddTimer(event);
+}
+
+
+void EventLoop::RunAfter(const EventCallBack& cb, int64_t time_delta) {
+    RunAt(cb, TimeUtils::GetTickMS() + time_delta);
+}
+
+void EventLoop::RunEvery(const EventCallBack& cb, int64_t interval) {
+    TimerEvent* event = new TimerEvent(cb, TimeUtils::GetTickMS(), interval);
+    AddTimer(event);
+}
+
+void EventLoop::Run(const EventCallBack& cb) {
+    {
+        ScopedMutex lock(&pending_queue_lock_);
+        pending_queue_.push_back(cb);
+    }
+    WakeUp();
+}
+
+void EventLoop::HandlePendings() {
+    PendingQueue copy_queue;
+    {
+        ScopedMutex lock(&pending_queue_lock_);
+        std::swap(copy_queue, pending_queue_);
+        assert(pending_queue_.empty());
+    }
+    for (auto& cb: copy_queue) {
+        if (cb) {
+            cb();
+        }
+    }
 }
 
 ZUTIL_NET_NAMESPACE_END

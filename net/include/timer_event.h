@@ -15,9 +15,9 @@ ZUTIL_NAMESPACE_USE;
 
 class TimerEvent {
 public:
-    TimerEvent(const TimerCallback& cb, const uint64_t when, const int32_t interval = 0);
+    TimerEvent(const TimerCallback& cb, const int64_t when, const int64_t interval = 0);
 
-    TimerEvent(TimerCallback&& cb, const uint64_t when, const int32_t interval = 0);
+    TimerEvent(TimerCallback&& cb, const int64_t when, const int64_t interval = 0);
 
     virtual ~TimerEvent();
 
@@ -25,11 +25,11 @@ public:
 
     bool IsValid() const;
 
-    int32_t interval() const {
+    int64_t interval() const {
         return interval_;
     }
 
-    uint64_t when() const {
+    int64_t when() const {
         return when_;
     }
 
@@ -43,8 +43,8 @@ public:
 
 private:
     TimerCallback callback_;
-    uint64_t when_;
-    int32_t interval_;
+    int64_t when_;
+    int64_t interval_;
     uint64_t seq_;
     static AtomicU64 seq_counter_;
 };

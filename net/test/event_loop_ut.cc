@@ -28,12 +28,12 @@ void stop_loop(EventLoop* loop) {
 TEST(EventLoopTest, TimerTest) {
     EventLoop* loop = new EventLoop();
     int64_t time = TimeUtils::GetTickMS();
-    loop->RunAfter(time - 10000, std::function<void()>(&print_hello));
-    loop->RunAfter(time + 1000, std::function<void()>(&print_hello));
-    loop->RunAfter(time + 1500, std::function<void()>(&print_goodbye));
+    loop->RunAt(std::function<void()>(&print_hello), time - 10000);
+    loop->RunAt(std::function<void()>(&print_hello), time + 1000);
+    loop->RunAt(std::function<void()>(&print_goodbye), time + 1500);
     std::function<void()> func = std::bind(stop_loop, nullptr);
-    loop->RunAfter(time + 2000, func);
-    loop->RunAfter(time + 3000, std::bind(stop_loop, loop));
+    loop->RunAt(func, time + 2000);
+    loop->RunAt(std::bind(stop_loop, loop), time + 3000);
 
     loop->Start();
 }

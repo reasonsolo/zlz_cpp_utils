@@ -22,6 +22,7 @@ enum class EventLoopState {
 
 NO_COPY_CLASS(EventLoop) {
     typedef std::multimap<int64_t, TimerEvent*> TimerQueue;
+    typedef std::vector<EventCallBack> PendingQueue;
 public:
     EventLoop();
 
@@ -38,9 +39,13 @@ public:
 
     void WakeUp();
 
-    void RunAfter(int64_t time, const EventCallBack& cb);
+    void Run(const EventCallBack& cb);
 
-    void RunEvery(int64_t interval, const EventCallBack& cb);
+    void RunAt(const EventCallBack& cb, int64_t time);
+
+    void RunAfter(const EventCallBack& cb, int64_t time_delta);
+
+    void RunEvery(const EventCallBack& cb, int64_t interval);
 
     void AddTimer(TimerEvent* event);
 
@@ -57,7 +62,6 @@ public:
     uint64_t loop_count() const {
         return loop_count_;
     }
-
 
     string ToString() const {
         return StringUtils::ToString("EventLoop@", this, ":", thread_id_);
@@ -77,7 +81,7 @@ private:
     const pthread_t thread_id_;
 
     uint64_t loop_count_;
-    uint64_t next_wake_up_;
+    int64_t next_wake_up_;
     volatile bool stop_;
     volatile bool waiting_;
     EventLoopState state_;
@@ -92,6 +96,8 @@ private:
 
     pthread_rwlock_t timer_queue_lock_;
     TimerQueue timer_queue_;
+    pthread_mutex_t pending_queue_lock_;
+    PendingQueue pending_queue_;
 
     static uint32_t poll_wait_time_;
 };

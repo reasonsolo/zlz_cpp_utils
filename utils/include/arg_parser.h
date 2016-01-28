@@ -459,7 +459,7 @@ public:
                 if (it.second->is_required() && input_args_.find(it.first) == input_args_.end()) {
                     err_msgs_.push_back(StringUtils::ToString(it.first, " error: required but missing"));
                 }
-                return false;
+                // return false;
             }
         }
         return true;

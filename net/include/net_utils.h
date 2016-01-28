@@ -16,16 +16,29 @@ ZUTIL_NET_NAMESPACE_BEGIN
 #define EV_CLOSE POLLHUP
 #define EV_ERROR POLLERR
 
-void set_fd_flags(int32_t fd, int32_t flag);
 
-bool has_fd_flags(int32_t fd, int32_t flag);
-
-
-static class IgnoreSigPipe
-{
+class NetUtils {
 public:
-    IgnoreSigPipe()
-    {
+
+    static void SetFdFlags(int32_t fd, int32_t flag);
+
+    static bool HasFdFlags(int32_t fd, int32_t flag);
+
+    /*
+     * implement these on demand
+     */
+    static void SockAddr2IP(const struct sockaddr& addr, string& ip);
+
+    static void SockAddr2IPPort(const struct sockaddr& addr, string& ip, int32_t& port);
+
+    static void SockAddr2IPPort(const struct sockaddr& addr, string& ip_port);
+
+};
+
+
+static class IgnoreSigPipe {
+public:
+    IgnoreSigPipe() {
         ::signal(SIGPIPE, SIG_IGN);
     }
 } _never_use_this;
