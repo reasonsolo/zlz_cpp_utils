@@ -11,6 +11,8 @@
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
+class TcpConnection;
+
 typedef std::function<void()> EventCallBack;
 typedef std::function<void()> TimerCallback;
 typedef std::function<void()> ReadEventCallback;
@@ -19,6 +21,10 @@ typedef std::function<void()> CloseEventCallback;
 typedef std::function<void()> ConnectEventCallback;
 typedef std::function<void()> ErrorEventCallback;
 
+typedef std::function<void(TcpConnection*)> ConnectionCallback;
+typedef std::function<void(TcpConnection*, string)> OnMessageCallback;
+typedef std::function<void()> WriteDoneCallback;
+typedef std::function<void(TcpConnection*)> CloseCallback;
 
 ZUTIL_NET_NAMESPACE_END
 

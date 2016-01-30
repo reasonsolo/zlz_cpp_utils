@@ -11,6 +11,15 @@
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
+Socket::Socket(const INetAddress& addr, bool nonblock) {
+    fd_ = socket(addr.GetSockAddr()->sa_family, SOCK_STREAM, IPPROTO_TCP);
+    if (fd_ < 0) {
+        ERROR_LOG("cannot create socket");
+    } else if (nonblock) {
+        NetUtils::SetFdFlags(fd_, SOCK_NONBLOCK | SOCK_CLOEXEC);
+    }
+}
+
 bool Socket::BindAddr(const INetAddress& addr) {
     if (bind(fd_, addr.GetSockAddr(), static_cast<socklen_t>(sizeof(struct sockaddr_in6))) < 0) {
         ERROR_LOG("cannot bind on addr " << addr.ip_port());
@@ -29,8 +38,11 @@ bool Socket::Listen() {
 
 int32_t Socket::Accept(INetAddress& peeraddr) {
     socklen_t addr_len = peeraddr.GetSockAddrLen();
-    int32_t connfd = accept(fd_, peeraddr.GetSockAddr(), &addr_len);
+    struct sockaddr_in6 addr;
+    bzero(&addr, sizeof(addr));
+    int32_t connfd = accept(fd_, static_cast<sockaddr*>(implict_cast<void*>(&addr)), &addr_len);
     NetUtils::SetFdFlags(connfd, SOCK_NONBLOCK | SOCK_CLOEXEC);
+    peeraddr.set_addr6(addr);
     if (connfd < 0) {
         ERROR_LOG("cannot accept socket " << peeraddr.ip_port() << ", error " << errno);
     }

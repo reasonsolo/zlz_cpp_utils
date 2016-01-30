@@ -5,9 +5,9 @@
 #ifndef ZUTILS_INETADDRESS_H
 #define ZUTILS_INETADDRESS_H
 
-#include "../../utils/include/common.h"
-// #include "common.h"
+#include "common.h"
 #include <netinet/in.h>
+#include "string_utils.h"
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
@@ -18,13 +18,13 @@ public:
      */
     explicit INetAddress(const string& addr, bool ipv6 = false);
 
-    INetAddress(const string& ip, const int32_t port, bool ipv6 = false);
+    INetAddress(const string& ip = "", const int32_t port = 0, bool ipv6 = false);
 
     explicit INetAddress(const struct sockaddr_in& addr);
 
     explicit INetAddress(const struct sockaddr_in6& addr);
 
-    struct sockaddr* GetSockAddr() const;
+    const struct sockaddr* GetSockAddr() const;
 
     socklen_t GetSockAddrLen() const;
 
@@ -45,6 +45,14 @@ public:
     static string Addr2IP(const struct sockaddr_in& addr);
 
     static string Addr62IP(const struct sockaddr_in6& addr);
+
+    void set_addr6(const struct sockaddr_in6& addr6) {
+        addr6_ = addr6;
+    }
+
+    void set_addr4(const struct sockaddr_in& addr) {
+        addr_ = addr;
+    }
 
 private:
     bool SetAddrIpv4(const string& ip, const int32_t port, struct sockaddr_in& addr);

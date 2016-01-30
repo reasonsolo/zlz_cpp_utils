@@ -29,7 +29,7 @@ INetAddress::INetAddress(const struct sockaddr_in6& addr) : addr6_(addr) {
     port_ = ntohs(addr6_.sin6_port);
 }
 
-INetAddress::INetAddress(const string& ip, const int32_t port, bool ipv6 = false) : ip_(ip), port_(port) {
+INetAddress::INetAddress(const string& ip, const int32_t port, bool ipv6) : ip_(ip), port_(port) {
     if (ipv6) {
         SetAddrIpv6(ip_, port_, addr6_);
     } else {
@@ -37,8 +37,8 @@ INetAddress::INetAddress(const string& ip, const int32_t port, bool ipv6 = false
     }
 }
 
-struct sockaddr* INetAddress::GetSockAddr() const {
-    return static_cast<struct sockaddr*>(implict_cast<void*>(&addr6_));
+const struct sockaddr* INetAddress::GetSockAddr() const {
+    return static_cast<const struct sockaddr*>(implict_cast<const void*>(&addr6_));
 }
 
 socklen_t INetAddress::GetSockAddrLen() const {

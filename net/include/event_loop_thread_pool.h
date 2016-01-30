@@ -18,13 +18,9 @@ NO_COPY_CLASS(EventLoopThreadPool) {
 public:
     typedef std::function<void(EventLoop*)> LoopInitCallback;
 
-    EventLoopThreadPool(uint32_t size);
+    EventLoopThreadPool();
 
     ~EventLoopThreadPool();
-
-    void Init(const LoopInitCallback& init_cb);
-
-    void Destroy();
 
     string ToString() const;
 
@@ -32,18 +28,25 @@ public:
 
     EventLoop* GetLoopByHash(int64_t hash);
 
+    void set_thread_size(uint32_t size) {
+        thread_size_ = size;
+    }
+
     void Start();
 
     void Stop();
 
 protected:
+    void Init();
+
+    void Destroy();
+
     static void ThreadFunctorRun(EventLoop* loop);
     static void ThreadFunctorStop(EventLoop* loop);
 
 private:
-    uint32_t pool_size_;
+    uint32_t thread_size_;
     uint32_t loop_index_;
-    LoopInitCallback init_cb_;
     vector<EventLoop*> event_loops_;
     vector<Thread*> threads_;
 };

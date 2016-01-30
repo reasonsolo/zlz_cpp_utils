@@ -7,13 +7,15 @@
       <sourceFolder url="file://$MODULE_DIR$/lib/googletest/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/googletest/cmake/internal_utils.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/net/src/event_loop_thread_pool.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/tcp_server.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/src/event_loop.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/src/net_utils.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/poll_poller.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/src/inet_address.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/src/poller.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/acceptor.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/event_loop_thread_pool.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/src/zsocket.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/net/src/poll_poller.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/src/channel.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/src/timer_event.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/CMakeLists.txt" isTestSource="false" />

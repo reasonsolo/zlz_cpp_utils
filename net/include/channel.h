@@ -8,11 +8,12 @@
 #include "common.h"
 #include "net_utils.h"
 #include "callbacks.h"
+#include "event_loop.h"
+#include "string_utils.h"
 #include <sys/poll.h>
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
-class EventLoop;
 
 class Channel {
 public:
@@ -54,20 +55,32 @@ public:
 
     virtual void HandleEvent();
 
-    inline void set_read_cb(EventCallBack&& cb) {
+    bool IsWritable() const {
+        return implict_cast<bool>(revents_ & EV_WRITE);
+    }
+
+    bool IsReadable() const {
+        return implict_cast<bool>(revents_ & EV_READ);
+    }
+
+    void set_read_cb(const EventCallBack& cb) {
         read_cb_ = std::move(cb);
     }
 
-    inline void set_write_cb(EventCallBack&& cb) {
+    void set_write_cb(const EventCallBack& cb) {
         write_cb_ = std::move(cb);
     }
 
-    inline void set_close_cb(EventCallBack&& cb) {
+    void set_close_cb(const EventCallBack& cb) {
         close_cb_ = std::move(cb);
     }
 
-    inline void set_error_cb(EventCallBack&& cb) {
+    void set_error_cb(const EventCallBack& cb) {
         error_cb_ = std::move(cb);
+    }
+
+    string ToString() const {
+        return StringUtils::ToString("Channel@", fd_);
     }
 
 private:
@@ -85,6 +98,8 @@ private:
     EventCallBack close_cb_;
     EventCallBack error_cb_;
 };
+
+typedef std::shared_ptr<Channel> ChannelPtr;
 
 ZUTIL_NET_NAMESPACE_END
 

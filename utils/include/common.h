@@ -21,6 +21,7 @@
 #include <unistd.h>
 #include <functional>
 #include <set>
+#include <memory>
 
 /*
  * you should never name a class duplicating the one in STL
@@ -33,7 +34,7 @@ using std::set;
 using std::map;
 using std::pair;
 using std::make_pair;
-
+using std::shared_ptr;
 
 // use following macros before logger module is available
 #define TRACE_LOG(x) std::cerr << x << std::endl;
@@ -81,6 +82,8 @@ private:
 
     NoCopy& operator=(const NoCopy& ncpy);
 };
+
+typedef string Buffer;
 
 #define NO_COPY_CLASS(x) class x: public NoCopy
 

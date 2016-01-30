@@ -45,6 +45,9 @@ EventLoop::~EventLoop() {
 }
 
 EventLoop* EventLoop::GetThreadLoop() {
+    if (!loop_in_thread) {
+        loop_in_thread = new EventLoop();
+    }
     return loop_in_thread;
 }
 
@@ -107,7 +110,7 @@ void EventLoop::AddTimer(TimerEvent* event) {
         ScopedWriteLock lock(&timer_queue_lock_);
         DEBUG_LOG(ToString() << " inserting timer event " << event->ToString());
         timer_queue_.insert(make_pair(event->when(), event));
-        if (event->when() < next_wake_up_) {
+        if (event->when() < next_wake_up_ && !IsInLoop()) {
             WakeUp();
         }
     } else {
@@ -202,7 +205,9 @@ void EventLoop::Run(const EventCallBack& cb) {
         ScopedMutex lock(&pending_queue_lock_);
         pending_queue_.push_back(cb);
     }
-    WakeUp();
+    if (!IsInLoop()) {
+        WakeUp();
+    }
 }
 
 void EventLoop::HandlePendings() {

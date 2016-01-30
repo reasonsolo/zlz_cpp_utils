@@ -8,8 +8,8 @@
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
-EventLoopThreadPool::EventLoopThreadPool(uint32_t size):
-        pool_size_(size), loop_index_(0) {
+EventLoopThreadPool::EventLoopThreadPool():
+         loop_index_(0) {
 
 }
 
@@ -17,10 +17,8 @@ EventLoopThreadPool::~EventLoopThreadPool() {
     Destroy();
 }
 
-void EventLoopThreadPool::Init(const LoopInitCallback& init_cb) {
-    init_cb_ = init_cb;
-
-    for (uint32_t i = 0; i < pool_size_; i++) {
+void EventLoopThreadPool::Init() {
+    for (uint32_t i = 0; i < thread_size_; i++) {
         EventLoop* loop = new EventLoop();
         event_loops_.push_back(loop);
 
@@ -41,6 +39,7 @@ void EventLoopThreadPool::Destroy() {
 }
 
 void EventLoopThreadPool::Start() {
+    Init();
     for (auto& thread: threads_) {
         thread->Start();
     }

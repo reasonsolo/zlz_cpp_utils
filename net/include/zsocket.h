@@ -5,7 +5,7 @@
 #ifndef ZUTILS_SOCKET_H
 #define ZUTILS_SOCKET_H
 
-#include "../../utils/include/common.h"
+#include "common.h"
 #include "inet_address.h"
 
 ZUTIL_NET_NAMESPACE_BEGIN
@@ -18,6 +18,8 @@ public:
     explicit Socket(int32_t fd): fd_(fd) {
     }
 
+    Socket(const INetAddress& addr, bool nonblock = true);
+
     ~Socket() {
         if (fd_ >= 0) {
             close(fd_);
@@ -27,7 +29,6 @@ public:
     int32_t fd() const {
         return fd_;
     }
-
 
     bool BindAddr(const INetAddress& addr);
 

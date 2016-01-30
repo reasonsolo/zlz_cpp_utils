@@ -8,6 +8,7 @@
 #include "common.h"
 #include "timer_event.h"
 #include "sensor.h"
+#include "zthread.h"
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
@@ -63,6 +64,14 @@ public:
         return loop_count_;
     }
 
+    bool IsInLoop() const {
+        return thread_id_ == Thread::GetThreadId();
+    }
+
+    void AssertInLoop() {
+        assert(IsInLoop());
+    }
+
     string ToString() const {
         return StringUtils::ToString("EventLoop@", this, ":", thread_id_);
     }
@@ -101,6 +110,8 @@ private:
 
     static uint32_t poll_wait_time_;
 };
+
+typedef std::shared_ptr<EventLoop> EventLoopPtr;
 
 ZUTIL_NET_NAMESPACE_END
 
