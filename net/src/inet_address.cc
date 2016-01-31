@@ -45,6 +45,18 @@ INetAddress::INetAddress(const INetAddress& inaddr) {
     addr6_ = inaddr.addr6_;
 }
 
+INetAddress::INetAddress(struct sockaddr* addr) {
+    if (addr->sa_family == AF_INET) {
+        memcpy(&addr_, addr, sizeof(addr_));
+        ip_ = AddrToIP(addr_);
+        port_ = ntohs(addr_.sin_port);
+    } else if (addr->sa_family == AF_INET6){
+        memcpy(&addr6_, addr, sizeof(addr6_));
+        ip_ = Addr6ToIP(addr6_);
+        port_ = ntohs(addr6_.sin6_port);
+    }
+}
+
 const struct sockaddr* INetAddress::GetSockAddr() const {
     if (ipv6_) {
         return static_cast<const struct sockaddr*>(implict_cast<const void*>(&addr6_));
@@ -89,6 +101,14 @@ string INetAddress::Addr6ToIP(const struct sockaddr_in6& addr) {
     char buf[128] = {0};
     inet_ntop(addr.sin6_family, &addr.sin6_addr, buf, sizeof(buf));
     return string(buf);
+}
+
+bool INetAddress::FdToLocalAddr(int32_t fd, struct sockaddr* sockaddr) {
+    socklen_t addr_len = sizeof(struct sockaddr);
+    if (getsockname(fd, sockaddr, &addr_len) != 0) {
+        return false;
+    }
+    return 0;
 }
 
 ZUTIL_NET_NAMESPACE_END

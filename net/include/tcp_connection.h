@@ -64,15 +64,15 @@ public:
         connection_cb_ = cb;
     }
 
-    void set_onmessage_cb_(const OnMessageCallback& cb) {
+    void set_onmessage_cb(const OnMessageCallback& cb) {
         onmessage_cb_ = cb;
     }
 
-    void set_writedone_cb_(const WriteDoneCallback& cb) {
+    void set_writedone_cb(const WriteDoneCallback& cb) {
         writedone_cb_ = cb;
     }
 
-    void set_close_cb_(const CloseCallback& cb) {
+    void set_close_cb(const CloseCallback& cb) {
         close_cb_ = cb;
     }
 
@@ -97,6 +97,10 @@ public:
         }
     }
 
+    void OnConnectionCreated();
+
+    void OnConnectionDestroyed();
+
 private:
 
     void HandleRead();
@@ -108,10 +112,6 @@ private:
     void HandleError();
 
     void ChangeState(ConnectionState from, ConnectionState to);
-
-    void OnConnectionCreated();
-
-    void OnConnectionDestroyed();
 
     void DoDisconnect();
 

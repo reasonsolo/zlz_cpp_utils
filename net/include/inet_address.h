@@ -24,6 +24,8 @@ public:
 
     explicit INetAddress(const struct sockaddr_in6& addr);
 
+    explicit INetAddress(struct sockaddr* addr);
+
     INetAddress(const INetAddress& inaddr);
 
     const struct sockaddr* GetSockAddr() const;
@@ -57,6 +59,8 @@ public:
         ipv6_ = false;
         addr_ = addr;
     }
+
+    static bool FdToLocalAddr(int32_t fd, struct sockaddr* sockaddr);
 
 private:
     bool SetAddrIpv4(const string& ip, const int32_t port, struct sockaddr_in& addr);

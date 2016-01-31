@@ -23,23 +23,38 @@ public:
 
     ~TcpServer();
 
-    void set_thread_num(int32_t num);
+    void set_thread_num(int32_t num) {
+        thread_num_ = num;
+    }
+
+    void set_keep_alive(bool on) {
+        is_keep_alive_ = on;
+    }
 
     void Start();
 
     void Stop();
+
+    string ToString() const {
+        return name_;
+    }
 private:
 
     void CreateNewConnection(int32_t fd, const INetAddress& addr);
+
+    void RemoveConnection(TcpConnection* conn);
 
     EventLoop* base_loop_;
     EventLoopThreadPool loop_pool_;
     Acceptor acceptor_;
     int32_t thread_num_;
+    string name_;
+    bool is_keep_alive_;
 
     ConnectionCallback connection_cb_;
     OnMessageCallback onmessage_cb_;
     WriteDoneCallback writedone_cb_;
+    CloseCallback     close_cb_;
 
     ConnnectionMap connection_map_;
 

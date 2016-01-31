@@ -10,8 +10,6 @@
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
-const size_t kMaxReadBufLen = 128 * 1024;
-
 TcpConnection::TcpConnection(EventLoop* loop, const string& name, int32_t fd,
                              const INetAddress& local_addr,
                              const INetAddress& peer_addr, bool keepalive) :
@@ -23,6 +21,7 @@ TcpConnection::TcpConnection(EventLoop* loop, const string& name, int32_t fd,
         state_(ConnectionState::kInit),
         channel_(new Channel(loop_, fd_)),
         socket_(new Socket(fd_)) {
+    assert(loop != nullptr);
     channel_->set_read_cb(std::bind(&TcpConnection::HandleRead, this));
     channel_->set_write_cb(std::bind(&TcpConnection::HandleWrite, this));
     channel_->set_close_cb(std::bind(&TcpConnection::HandleClose, this));

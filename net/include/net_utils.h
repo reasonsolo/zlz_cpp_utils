@@ -24,15 +24,6 @@ public:
 
     static bool HasFdFlags(int32_t fd, int32_t flag);
 
-    /*
-     * implement these on demand
-     */
-    static void SockAddr2IP(const struct sockaddr& addr, string& ip);
-
-    static void SockAddr2IPPort(const struct sockaddr& addr, string& ip, int32_t& port);
-
-    static void SockAddr2IPPort(const struct sockaddr& addr, string& ip_port);
-
 };
 
 
