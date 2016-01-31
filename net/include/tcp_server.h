@@ -37,7 +37,7 @@ private:
     Acceptor acceptor_;
     int32_t thread_num_;
 
-    ConnectedCallback connected_cb_;
+    ConnectionCallback connection_cb_;
     OnMessageCallback onmessage_cb_;
     WriteDoneCallback writedone_cb_;
 

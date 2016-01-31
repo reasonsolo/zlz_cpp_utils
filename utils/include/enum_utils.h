@@ -32,7 +32,7 @@ struct EnumStrings {
 };
 
 // This is a utility type.
-// Creted automatically. Should not be used directly.
+// Created automatically. Should not be used directly.
 template<typename T>
 struct EnumRefHolder {
     T& enum_;

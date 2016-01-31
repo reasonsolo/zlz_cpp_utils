@@ -15,8 +15,12 @@ enum class ConnectionState {
     kInit,
     kConnecting,
     kConnected,
+    kDisconnecting,
     kDisconnected
 };
+
+
+class EventLoop;
 
 class Socket;
 
@@ -24,12 +28,13 @@ class Channel;
 
 class TcpConnection {
 public:
-    TcpConnection(EventLoop* loop, const string& name, int32_t fd, const INetAddress& localaddr,
+    TcpConnection(EventLoop* loop, const string& name, int32_t fd,
+                  const INetAddress& localaddr,
                   const INetAddress& peeraddr, bool keepalive = true);
 
     ~TcpConnection();
 
-    EventLoopPtr loop() const {
+    EventLoop* loop() const {
         return loop_;
     }
 
@@ -71,8 +76,25 @@ public:
         close_cb_ = cb;
     }
 
+    void Send(const char* data, size_t size);
+
     string ToString() const {
         return name_;
+    }
+
+    static string ToString(ConnectionState state) {
+        switch (state) {
+            case ConnectionState::kInit:
+                return "init";
+            case ConnectionState::kConnecting:
+                return "connecting";
+            case ConnectionState::kConnected:
+                return "connected";
+            case ConnectionState::kDisconnecting:
+                return "disconnecting";
+            case ConnectionState::kDisconnected:
+                return "disconnected";
+        }
     }
 
 private:
@@ -91,14 +113,20 @@ private:
 
     void OnConnectionDestroyed();
 
-    EventLoop* loop_;
+    void DoDisconnect();
 
+    void DoSend(const char* data, size_t size);
+
+    EventLoop* loop_;
     string name_;
+    int32_t fd_;
     INetAddress local_addr_;
     INetAddress peer_addr_;
     volatile ConnectionState state_;
     Channel* channel_;
     Socket* socket_;
+    Buffer in_buf_;
+    Buffer out_buf_;
 
     ConnectionCallback connection_cb_;
     OnMessageCallback onmessage_cb_;

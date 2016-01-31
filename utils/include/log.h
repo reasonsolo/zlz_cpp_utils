@@ -84,7 +84,7 @@ do { \
         logger->Log(LogLevel::FATAL, __FILE__, __LINE__, ss); \
         logger->ClearUp();\
     } \
-    assert(__FILE__ == -1); \
+    assert(__LINE__ == -1); \
 } while (0)
 
 

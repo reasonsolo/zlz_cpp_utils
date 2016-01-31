@@ -53,7 +53,7 @@ using std::shared_ptr;
 
 #define handle_sys_error(x) perror(x)
 
-const uint32_t kIOBufMax = 10 * 1024 * 1024;
+const uint32_t kIOBufMax = 64 * 1024 * 1024;
 
 /*
  * implict cast, usage: implict_cast<TO>(from)
@@ -82,8 +82,6 @@ private:
 
     NoCopy& operator=(const NoCopy& ncpy);
 };
-
-typedef string Buffer;
 
 #define NO_COPY_CLASS(x) class x: public NoCopy
 

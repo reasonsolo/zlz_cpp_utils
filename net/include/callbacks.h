@@ -5,9 +5,9 @@
 #ifndef ZUTILS_CALLBACKS_H
 #define ZUTILS_CALLBACKS_H
 
-
 #include "common.h"
 #include <functional>
+#include "buffer.h"
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
@@ -22,7 +22,7 @@ typedef std::function<void()> ConnectEventCallback;
 typedef std::function<void()> ErrorEventCallback;
 
 typedef std::function<void(TcpConnection*)> ConnectionCallback;
-typedef std::function<void(TcpConnection*, string)> OnMessageCallback;
+typedef std::function<void(TcpConnection*, Buffer)> OnMessageCallback;
 typedef std::function<void()> WriteDoneCallback;
 typedef std::function<void(TcpConnection*)> CloseCallback;
 

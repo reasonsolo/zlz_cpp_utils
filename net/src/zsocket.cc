@@ -49,6 +49,18 @@ int32_t Socket::Accept(INetAddress& peeraddr) {
     return connfd;
 }
 
+void Socket::ShutDown() {
+    shutdown(fd_, SHUT_RDWR);
+}
+
+void Socket::ShutDownWrite() {
+    shutdown(fd_, SHUT_WR);
+}
+
+void Socket::ShutDownRead() {
+    shutdown(fd_, SHUT_RD);
+}
+
 void Socket::SetKeepAlive(bool on) {
     int32_t optval = on;
     ::setsockopt(fd_, IPPROTO_TCP, SO_KEEPALIVE,
@@ -63,6 +75,15 @@ void Socket::SetTcpNoDelay(bool on) {
 
 void Socket::SetNonBlock() {
     NetUtils::SetFdFlags(fd_, SOCK_NONBLOCK | SOCK_CLOEXEC);
+}
+
+int32_t Socket::GetError() {
+    int32_t optval = 0;
+    socklen_t len = static_cast<socklen_t>(sizeof(optval));
+    if (getsockopt(fd_, SOL_SOCKET, SO_ERROR, &optval, &len) < 0) {
+        return errno;
+    }
+    return optval;
 }
 
 

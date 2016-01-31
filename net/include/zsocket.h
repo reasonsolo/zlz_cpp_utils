@@ -15,10 +15,10 @@ struct tcp_info;
 
 class Socket {
 public:
-    explicit Socket(int32_t fd): fd_(fd) {
+    Socket(int32_t fd) : fd_(fd) {
     }
 
-    Socket(const INetAddress& addr, bool nonblock = true);
+    explicit Socket(const INetAddress& addr, bool nonblock);
 
     ~Socket() {
         if (fd_ >= 0) {
@@ -36,11 +36,19 @@ public:
 
     int32_t Accept(INetAddress& peeraddr);
 
+    void ShutDown();
+
+    void ShutDownRead();
+
+    void ShutDownWrite();
+
     void SetTcpNoDelay(bool on = true);
 
     void SetKeepAlive(bool on = true);
 
     void SetNonBlock();
+
+    int32_t GetError();
 
     string ToString() const;
 

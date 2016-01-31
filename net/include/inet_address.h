@@ -16,13 +16,15 @@ public:
     /*
      * format like 127.0.0.1:8080
      */
-    explicit INetAddress(const string& addr, bool ipv6 = false);
+    explicit INetAddress(const string& addr = "", bool ipv6 = false);
 
-    INetAddress(const string& ip = "", const int32_t port = 0, bool ipv6 = false);
+    explicit INetAddress(const string& ip, const int32_t port, bool ipv6 = false);
 
     explicit INetAddress(const struct sockaddr_in& addr);
 
     explicit INetAddress(const struct sockaddr_in6& addr);
+
+    INetAddress(const INetAddress& inaddr);
 
     const struct sockaddr* GetSockAddr() const;
 
@@ -42,15 +44,17 @@ public:
 
     static bool ParseIPAndPort(const string& addr, string& ip, int32_t& port);
 
-    static string Addr2IP(const struct sockaddr_in& addr);
+    static string AddrToIP(const struct sockaddr_in& addr);
 
-    static string Addr62IP(const struct sockaddr_in6& addr);
+    static string Addr6ToIP(const struct sockaddr_in6& addr);
 
     void set_addr6(const struct sockaddr_in6& addr6) {
+        ipv6_ = true;
         addr6_ = addr6;
     }
 
     void set_addr4(const struct sockaddr_in& addr) {
+        ipv6_ = false;
         addr_ = addr;
     }
 
@@ -61,11 +65,9 @@ private:
 
     string ip_;
     int32_t port_;
-
-    union {
-        struct sockaddr_in addr_;
-        struct sockaddr_in6 addr6_;
-    };
+    struct sockaddr_in addr_;
+    struct sockaddr_in6 addr6_;
+    bool ipv6_;
 
 };
 

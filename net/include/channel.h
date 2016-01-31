@@ -56,11 +56,11 @@ public:
     virtual void HandleEvent();
 
     bool IsWritable() const {
-        return implict_cast<bool>(revents_ & EV_WRITE);
+        return implict_cast<bool>((revents_) & (EV_WRITE));
     }
 
     bool IsReadable() const {
-        return implict_cast<bool>(revents_ & EV_READ);
+        return implict_cast<bool>((revents_) & (EV_READ));
     }
 
     void set_read_cb(const EventCallBack& cb) {
