@@ -95,6 +95,7 @@ public:
             case ConnectionState::kDisconnected:
                 return "disconnected";
         }
+        return "unknown";
     }
 
     void OnConnectionCreated();

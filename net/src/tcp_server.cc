@@ -9,22 +9,33 @@
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
+
+using std::placeholders::_1;
+using std::placeholders::_2;
+
 TcpServer::TcpServer(const INetAddress& bind_addr) :
         base_loop_(EventLoop::GetThreadLoop()),
         acceptor_(base_loop_, bind_addr),
         thread_num_(1),
-        is_keep_alive_(true) {
-
+        is_keep_alive_(true),
+        name_(string("TcpServer@").append(bind_addr.ip_port())),
+        connection_cb_(std::bind(&TcpServer::DefaultConnectionCallback, this, _1)),
+        onmessage_cb_(std::bind(&TcpServer::DefaultOnMessageCallback, this, _1, _2)),
+        writedone_cb_(std::bind(&TcpServer::DefaultWriteDoneCallback, this, _1)),
+        close_cb_(std::bind(&TcpServer::DefaultCloseCallback, this, _1)) {
+    loop_pool_.set_thread_size(thread_num_);
 }
 
 TcpServer::~TcpServer() {
     Stop();
+    delete base_loop_;
 }
 
 void TcpServer::Start() {
+    DEBUG_LOG(ToString() << " is starting");
     assert(!acceptor_.is_listening());
     // base_loop_->Run(std::bind(&Acceptor::Listen, &acceptor_));
-    base_loop_->Run(std::bind(&Acceptor::Listen, &acceptor_));
+    acceptor_.Listen();
     loop_pool_.Start();
     base_loop_->Start();
 }
@@ -59,6 +70,22 @@ void TcpServer::RemoveConnection(TcpConnection* conn) {
         conn->loop()->AssertInLoop();
         conn->OnConnectionDestroyed();
     }
+}
+
+void TcpServer::DefaultConnectionCallback(TcpConnection* conn) {
+    DEBUG_LOG("TcpServer connection " << conn->ToString() << " connection callback");
+}
+
+void TcpServer::DefaultOnMessageCallback(TcpConnection* conn, Buffer* buffer) {
+    DEBUG_LOG("TcpServer connection " << conn->ToString() << " get message: " << buffer->TakeAllString());
+}
+
+void TcpServer::DefaultWriteDoneCallback(TcpConnection* conn) {
+    DEBUG_LOG("TcpServer connection " << conn->ToString() << " write done callback");
+}
+
+void TcpServer::DefaultCloseCallback(TcpConnection* conn) {
+    DEBUG_LOG("TcpServer connection " << conn->ToString() << " closed");
 }
 
 ZUTIL_NET_NAMESPACE_END

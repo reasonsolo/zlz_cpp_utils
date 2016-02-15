@@ -22,12 +22,15 @@ Acceptor::~Acceptor() {
 }
 
 void Acceptor::Listen() {
-    loop_->AssertInLoop();
-    DEBUG_LOG("listening on " << socket_.ToString());
-    socket_.Listen();
-    channel_.EnableRead();
-    is_listening_ = true;
-
+    if (loop_->IsInLoop()) {
+        DEBUG_LOG("listening on " << socket_.ToString());
+        socket_.Listen();
+        channel_.EnableRead();
+        is_listening_ = true;
+    } else {
+        DEBUG_LOG("try to listen on " << socket_.ToString());
+        loop_->Run(std::bind(&Acceptor::Listen, this));
+    }
 }
 
 void Acceptor::HandleRead() {

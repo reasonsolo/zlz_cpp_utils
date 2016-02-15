@@ -41,8 +41,9 @@ protected:
 
     void Destroy();
 
-    static void ThreadFunctorRun(EventLoop* loop);
-    static void ThreadFunctorStop(EventLoop* loop);
+    void ThreadFunctorRun(uint32_t index);
+
+    void ThreadFunctorStop(uint32_t index);
 
 private:
     uint32_t thread_size_;

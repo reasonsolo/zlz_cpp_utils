@@ -108,7 +108,7 @@ bool INetAddress::FdToLocalAddr(int32_t fd, struct sockaddr* sockaddr) {
     if (getsockname(fd, sockaddr, &addr_len) != 0) {
         return false;
     }
-    return 0;
+    return true;
 }
 
 ZUTIL_NET_NAMESPACE_END

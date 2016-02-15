@@ -44,7 +44,7 @@ void TcpConnection::HandleRead() {
     int32_t size = in_buf_.ReadFromFd(channel_->fd(), error);
     if (size > 0) {
         DEBUG_LOG(ToString() << " reads " << size << " from " << channel_->ToString());
-        onmessage_cb_(this, in_buf_);
+        onmessage_cb_(this, &in_buf_);
     } else if (size == 0) {
         HandleClose();
     } else {
@@ -149,7 +149,7 @@ void TcpConnection::DoSend(const char* data, size_t size) {
         // send directly if there is not any other writing operation and send buf is empty
         written = write(channel_->fd(), data, size);
         if (written >= 0) {
-            if (written == size) {
+            if (static_cast<size_t>(written) == size) {
                 if (writedone_cb_) {
                     writedone_cb_(this);
                 }

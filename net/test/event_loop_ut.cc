@@ -21,9 +21,19 @@ void print_goodbye() {
 
 void stop_loop(EventLoop* loop) {
     printf("stopping loop\n");
-    if (loop)
+    if (loop) {
         loop->Stop();
+        delete loop;
+    }
+
 }
+
+TEST(EventLoopTest, BaseTest) {
+    EventLoop* loop = new EventLoop();
+    EXPECT_EQ(loop, EventLoop::GetThreadLoop());
+    delete loop;
+}
+
 
 TEST(EventLoopTest, TimerTest) {
     EventLoop* loop = new EventLoop();
@@ -36,4 +46,5 @@ TEST(EventLoopTest, TimerTest) {
     loop->RunAt(std::bind(stop_loop, loop), time + 3000);
 
     loop->Start();
+    //delete loop;
 }

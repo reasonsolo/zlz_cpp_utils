@@ -22,8 +22,8 @@ typedef std::function<void()> ConnectEventCallback;
 typedef std::function<void()> ErrorEventCallback;
 
 typedef std::function<void(TcpConnection*)> ConnectionCallback;
-typedef std::function<void(TcpConnection*, Buffer)> OnMessageCallback;
-typedef std::function<void()> WriteDoneCallback;
+typedef std::function<void(TcpConnection*, Buffer*)> OnMessageCallback;
+typedef std::function<void(TcpConnection*)> WriteDoneCallback;
 typedef std::function<void(TcpConnection*)> CloseCallback;
 
 ZUTIL_NET_NAMESPACE_END

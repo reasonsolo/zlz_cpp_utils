@@ -8,7 +8,6 @@
 #include "log.h"
 #include <sys/poll.h>
 
-
 ZUTIL_NET_NAMESPACE_BEGIN
 
 PollPoller::PollPoller(EventLoop* loop): Poller(loop) {
@@ -75,10 +74,10 @@ void PollPoller::RemoveChannel(Channel* channel) {
     if (channels_.find(channel->fd()) != channels_.end()) {
         // remove fd carefully
         assert(channels_[channel->fd()] == channel);
-        assert(channel->index() > 0 && channel->index() < static_cast<int32_t>(fd_list_.size()));
+        assert(channel->index() >= 0 && channel->index() < static_cast<int32_t>(fd_list_.size()));
 
-        size_t index = channel->index();
-        if (index != fd_list_.size() - 1) {
+        ssize_t index = channel->index();
+        if (static_cast<size_t>(index) != fd_list_.size() - 1) {
             // swap indices and references
             channels_[fd_list_.back().fd]->set_index(index);
             std::swap(fd_list_[index], fd_list_.back());

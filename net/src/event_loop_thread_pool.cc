@@ -18,12 +18,10 @@ EventLoopThreadPool::~EventLoopThreadPool() {
 }
 
 void EventLoopThreadPool::Init() {
+    event_loops_.resize(thread_size_);
     for (uint32_t i = 0; i < thread_size_; i++) {
-        EventLoop* loop = new EventLoop();
-        event_loops_.push_back(loop);
-
-        Thread* thread = new Thread(std::bind(ThreadFunctorRun, loop));
-        thread->set_before_stop(std::bind(ThreadFunctorStop, loop));
+        Thread* thread = new Thread(std::bind(&EventLoopThreadPool::ThreadFunctorRun, this, i));
+        thread->set_before_stop(std::bind(&EventLoopThreadPool::ThreadFunctorStop, this, i));
         threads_.push_back(thread);
     }
 }
@@ -59,12 +57,17 @@ EventLoop* EventLoopThreadPool::GetLoopByHash(int64_t hash) {
     return event_loops_[static_cast<uint32_t>(hash) % event_loops_.size()];
 }
 
-void EventLoopThreadPool::ThreadFunctorRun(EventLoop* loop) {
+void EventLoopThreadPool::ThreadFunctorRun(uint32_t index) {
+    TRACE_LOG("thread function running");
+    EventLoop* loop = new EventLoop();
+    assert(event_loops_.size() > index);
+    event_loops_[index] = loop;
     loop->Start();
 }
 
-void EventLoopThreadPool::ThreadFunctorStop(EventLoop* loop) {
-    loop->Stop();
+void EventLoopThreadPool::ThreadFunctorStop(uint32_t index) {
+    assert(event_loops_.size() > index);
+    event_loops_[index]->Stop();
 }
 
 ZUTIL_NET_NAMESPACE_END

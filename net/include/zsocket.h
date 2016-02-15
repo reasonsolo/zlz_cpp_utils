@@ -46,11 +46,15 @@ public:
 
     void SetKeepAlive(bool on = true);
 
+    void SetReuseAddr(bool on = true);
+
     void SetNonBlock();
 
     int32_t GetError();
 
-    string ToString() const;
+    string ToString() const {
+        return StringUtils::ToString("socket-", fd_);
+    }
 
 private:
 

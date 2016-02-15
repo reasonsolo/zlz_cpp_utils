@@ -19,6 +19,7 @@ class TcpConnection;
 class TcpServer {
 public:
     typedef map<string, TcpConnection*> ConnnectionMap;
+
     TcpServer(const INetAddress& bind_addr);
 
     ~TcpServer();
@@ -38,7 +39,16 @@ public:
     string ToString() const {
         return name_;
     }
-private:
+
+protected:
+
+    void DefaultConnectionCallback(TcpConnection* conn);
+
+    void DefaultOnMessageCallback(TcpConnection* conn, Buffer* buffer);
+
+    void DefaultWriteDoneCallback(TcpConnection* conn);
+
+    void DefaultCloseCallback(TcpConnection* conn);
 
     void CreateNewConnection(int32_t fd, const INetAddress& addr);
 
@@ -47,14 +57,14 @@ private:
     EventLoop* base_loop_;
     EventLoopThreadPool loop_pool_;
     Acceptor acceptor_;
-    int32_t thread_num_;
-    string name_;
+    uint32_t thread_num_;
     bool is_keep_alive_;
+    string name_;
 
     ConnectionCallback connection_cb_;
     OnMessageCallback onmessage_cb_;
     WriteDoneCallback writedone_cb_;
-    CloseCallback     close_cb_;
+    CloseCallback close_cb_;
 
     ConnnectionMap connection_map_;
 

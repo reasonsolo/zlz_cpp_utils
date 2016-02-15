@@ -30,9 +30,10 @@ bool Socket::BindAddr(const INetAddress& addr) {
 
 bool Socket::Listen() {
     if (listen(fd_, SOMAXCONN) < 0) {
-        ERROR_LOG("cannot listen on fd " << fd_);
+        ERROR_LOG(ToString() << "cannot listen on fd " << fd_);
         return false;
     }
+    DEBUG_LOG(ToString() << " listen ok");
     return true;
 }
 
@@ -75,6 +76,12 @@ void Socket::SetTcpNoDelay(bool on) {
 
 void Socket::SetNonBlock() {
     NetUtils::SetFdFlags(fd_, SOCK_NONBLOCK | SOCK_CLOEXEC);
+}
+
+void Socket::SetReuseAddr(bool on) {
+    int32_t optval = on;
+    ::setsockopt(fd_, IPPROTO_TCP, SO_REUSEADDR,
+                 &optval, static_cast<socklen_t>(sizeof optval));
 }
 
 int32_t Socket::GetError() {

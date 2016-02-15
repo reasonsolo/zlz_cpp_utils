@@ -6,6 +6,7 @@
 #define ZUTILS_BUFFER_H
 
 #include "common.h"
+#include <sys/uio.h>
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
@@ -132,12 +133,13 @@ public:
         ssize_t n = readv(fd, vec, 2);
         if (n < 0) {
             error =  errno;
-        } else if (n  <= WritableSize()) {
+        } else if (static_cast<size_t>(n) <= WritableSize()) {
             write_index_ += n;
         } else {
             write_index_ = buffer_.size();
             Append(ext_buf, n - WritableSize());
         }
+        return n;
     }
 
 private:
