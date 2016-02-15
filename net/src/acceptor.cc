@@ -13,6 +13,7 @@ Acceptor::Acceptor(EventLoop* loop, const INetAddress& addr) :
         channel_(loop, socket_.fd()),
         socket_(addr, true),
         is_listening_(false) {
+    socket_.BindAddr(addr);
     channel_.set_read_cb(std::bind(&Acceptor::HandleRead, this));
 }
 

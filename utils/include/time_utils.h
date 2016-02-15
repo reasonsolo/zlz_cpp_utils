@@ -31,8 +31,10 @@ public:
         struct tm ts_struct;
         char buf[30] = { 0 };
         time_t ts = static_cast<time_t>(ts_in_ms / 1000);
+        int64_t ms = ts_in_ms % 1000;
         ts_struct = *localtime(&ts);
-        strftime(buf, sizeof(buf), "%Y-%m-%d %X", &ts_struct);
+        size_t time_str_size = strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &ts_struct);
+        snprintf(buf + time_str_size, sizeof(buf) - time_str_size, ".%ld", ms);
         return string(buf);
     }
 

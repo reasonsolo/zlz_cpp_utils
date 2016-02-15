@@ -22,7 +22,7 @@ public:
 
     ~Acceptor();
 
-    void SetNewConnectionCallback(const NewConnectionCallback& cb) {
+    void set_new_conn_cb(const NewConnectionCallback& cb) {
         new_conn_cb_ = cb;
     }
 

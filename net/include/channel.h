@@ -64,19 +64,19 @@ public:
     }
 
     void set_read_cb(const EventCallBack& cb) {
-        read_cb_ = std::move(cb);
+        read_cb_ = cb;
     }
 
     void set_write_cb(const EventCallBack& cb) {
-        write_cb_ = std::move(cb);
+        write_cb_ = cb;
     }
 
     void set_close_cb(const EventCallBack& cb) {
-        close_cb_ = std::move(cb);
+        close_cb_ = cb;
     }
 
     void set_error_cb(const EventCallBack& cb) {
-        error_cb_ = std::move(cb);
+        error_cb_ = cb;
     }
 
     string ToString() const {

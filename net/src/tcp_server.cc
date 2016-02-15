@@ -9,7 +9,6 @@
 
 ZUTIL_NET_NAMESPACE_BEGIN
 
-
 using std::placeholders::_1;
 using std::placeholders::_2;
 
@@ -24,6 +23,7 @@ TcpServer::TcpServer(const INetAddress& bind_addr) :
         writedone_cb_(std::bind(&TcpServer::DefaultWriteDoneCallback, this, _1)),
         close_cb_(std::bind(&TcpServer::DefaultCloseCallback, this, _1)) {
     loop_pool_.set_thread_size(thread_num_);
+    acceptor_.set_new_conn_cb(std::bind(&TcpServer::CreateNewConnection, this, _1, _2));
 }
 
 TcpServer::~TcpServer() {
@@ -46,6 +46,7 @@ void TcpServer::Stop() {
 }
 
 void TcpServer::CreateNewConnection(int32_t fd, const INetAddress& peer_addr) {
+    DEBUG_LOG(ToString() << " get new connection from fd " << fd << " " << peer_addr.ip_port());
     EventLoop* next_loop = loop_pool_.GetNextLoop();
     string conn_name = StringUtils::ToString(name_, "-conn@", peer_addr.ip_port());
     sockaddr sockaddr;
@@ -69,6 +70,7 @@ void TcpServer::RemoveConnection(TcpConnection* conn) {
     } else {
         conn->loop()->AssertInLoop();
         conn->OnConnectionDestroyed();
+        delete conn;
     }
 }
 

@@ -18,7 +18,7 @@ TcpConnection::TcpConnection(EventLoop* loop, const string& name, int32_t fd,
         fd_(fd),
         local_addr_(local_addr),
         peer_addr_(peer_addr),
-        state_(ConnectionState::kInit),
+        state_(ConnectionState::kConnecting),
         channel_(new Channel(loop_, fd_)),
         socket_(new Socket(fd_)) {
     assert(loop != nullptr);
