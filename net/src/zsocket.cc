@@ -4,8 +4,6 @@
 
 #include "zsocket.h"
 #include <sys/socket.h>
-#include <netinet/tcp.h>
-#include <netinet/in.h>
 #include "log.h"
 #include "net_utils.h"
 

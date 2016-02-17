@@ -12,6 +12,11 @@
 
 ZUTIL_NAMESPACE_BEGIN
 
+template <typename T, size_t S>
+static size_t ArraySize(const T (&v)[S]) {
+    return S;
+};
+
 template<typename T>
 string get_typename(const T& t) {
     // use typeid but avoid rtti

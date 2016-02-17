@@ -2,66 +2,254 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/strlcpy-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/evutil_rand.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_finalize.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/bench_httpclient.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/bench_cascade.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/test-changelist.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/test-init.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/tinytest.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/test-ratelim.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_dns.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_listener.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_testutils.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/test-fdleak.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/test-eof.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/test-time.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_main.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/tinytest.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_minheap.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_testutils.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/test-dumpevents.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_util.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/bench_http.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/test-weof.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_thread.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_buffer.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_rpc.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_thread.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_zlib.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/bench.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_et.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_ssl.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_bufferevent.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress.gen.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/test/regress_http.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/bufferevent.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/event-config.h.cmake" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/bufferevent_ratelim.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/ht-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/event_tagging.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/evrpc-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/evdns.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/select.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/evutil_time.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/buffer.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/epolltable-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/evmap-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/sample/event-read-fifo.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/sample/hostcheck.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/sample/signal-test.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/sample/http-server.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/sample/openssl_hostname_validation.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/sample/http-connect.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/sample/https-client.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/sample/hello-world.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/sample/le-proxy.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/sample/hostcheck.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/sample/openssl_hostname_validation.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/sample/dns-example.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/sample/time-test.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/changelist-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/evutil.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/ipv6-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/util-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/signal.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/bufferevent_openssl.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/log.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/ratelim-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/bufferevent_filter.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/bufferevent_sock.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/compat/sys/queue.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/evutil.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/evhttp.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/evrpc.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/evdns.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/http.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/http_struct.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/http_compat.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/rpc.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/bufferevent_struct.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/bufferevent_compat.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/dns.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/tag_compat.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/keyvalq_struct.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/event_struct.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/event_compat.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/buffer.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/tag.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/dns_compat.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/bufferevent_ssl.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/event.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/dns_struct.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/rpc_struct.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/rpc_compat.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/listener.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/bufferevent.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/thread.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/visibility.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/util.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/include/event2/buffer_compat.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/defer-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/evrpc.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/bufferevent_pair.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/evbuffer-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/evthread-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/strlcpy.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/evmap.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/evconfig-private.h.cmake" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/mm-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/event-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/listener.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/evsignal-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/iocp-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/poll.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/event.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/evconfig-private.h.in" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/bufferevent-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/minheap-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/http.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/http-internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/cmake/CheckFunctionExistsEx.cmake" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/cmake/LibeventConfigVersion.cmake.in" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/cmake/LibeventConfig.cmake.in" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/cmake/FindGit.cmake" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/cmake/VersionViaGit.cmake" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/cmake/LibeventConfigBuildTree.cmake.in" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/cmake/CheckFileOffsetBits.cmake" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/cmake/AddCompilerFlags.cmake" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/cmake/CheckFunctionKeywords.cmake" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/cmake/CheckPrototypeDefinition.cmake" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/evthread_pthread.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/evthread.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/libevent/log-internal.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/googletest/src/gtest_main.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/googletest/src/gtest-all.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/googletest/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/googletest/cmake/internal_utils.cmake" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/evhttp/src/ev_thread_pool.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/evhttp/src/evhttp.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/evhttp/src/ev_thread.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/evhttp/src/ev_uri.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/evhttp/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/evhttp/test/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/evhttp/test/evhttp_ut.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/src/file_utils.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/src/lock.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/src/zthread.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/src/logger.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/src/string_utils.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/src/numeric_utils.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/src/sync_logger.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/src/sys_utils.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/src/type_utils.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/src/ini_parser.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/test/file_ut.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/test/string_utils_ut.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/test/container_utils_ut.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/test/ini_parser_ut.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/test/arg_parser_ut.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/test/thread_ut.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/test/sensor_ut.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/base/test/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/src/tcp_server.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/net/src/tcp_connection.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/net/src/timer_event.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/net/src/net_utils.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/net/src/inet_address.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/net/src/poller.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/zsocket.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/src/event_loop.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/net_utils.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/channel.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/inet_address.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/poll_poller.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/src/acceptor.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/src/event_loop_thread_pool.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/net/src/zsocket.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/net/src/channel.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/net/src/poll_poller.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/tcp_connection.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/poller.cc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/net/src/timer_event.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/test/event_loop_ut.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/test/tcp_server_ut.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/net/test/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/src/file_utils.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/src/lock.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/src/zthread.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/src/ini_parser.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/src/string_utils.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/src/numeric_utils.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/src/logger.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/src/sys_utils.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/src/type_utils.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/src/sync_logger.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/test/file_ut.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/test/string_utils_ut.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/test/container_utils_ut.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/test/ini_parser_ut.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/test/arg_parser_ut.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/test/thread_ut.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/test/sensor_ut.cc" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/utils/test/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
       <library name="Header Search Paths">
         <CLASSES>
+          <root url="file://$MODULE_DIR$/lib/libevent/compat" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include" />
           <root url="file://$MODULE_DIR$/lib/googletest/include" />
+          <root url="file://$MODULE_DIR$/evhttp/include" />
+          <root url="file://$MODULE_DIR$/base/include" />
           <root url="file://$MODULE_DIR$/net/include" />
-          <root url="file://$MODULE_DIR$/utils/include" />
+          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/13a8d8a7/13a8d8a7/__default__/lib/libevent/include" />
+          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/13a8d8a7/13a8d8a7/Debug/lib/libevent/include" />
+          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/13a8d8a7/13a8d8a7/Release/lib/libevent/include" />
           <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include" />
           <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include-fixed" />
           <root url="file://C:/cygwin64/usr/include" />
         </CLASSES>
         <SOURCES>
+          <root url="file://$MODULE_DIR$/lib/libevent/compat" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include" />
           <root url="file://$MODULE_DIR$/lib/googletest/include" />
+          <root url="file://$MODULE_DIR$/evhttp/include" />
+          <root url="file://$MODULE_DIR$/base/include" />
           <root url="file://$MODULE_DIR$/net/include" />
-          <root url="file://$MODULE_DIR$/utils/include" />
+          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/13a8d8a7/13a8d8a7/__default__/lib/libevent/include" />
+          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/13a8d8a7/13a8d8a7/Debug/lib/libevent/include" />
+          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/13a8d8a7/13a8d8a7/Release/lib/libevent/include" />
           <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include" />
           <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include-fixed" />
           <root url="file://C:/cygwin64/usr/include" />
         </SOURCES>
+        <excluded>
+          <root url="file://$MODULE_DIR$/lib/libevent/compat/sys/queue.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/evutil.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/evhttp.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/evrpc.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/evdns.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/http.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/http_struct.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/http_compat.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/rpc.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/bufferevent_struct.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/bufferevent_compat.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/dns.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/tag_compat.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/keyvalq_struct.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/event_struct.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/event_compat.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/buffer.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/tag.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/dns_compat.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/bufferevent_ssl.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/event.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/dns_struct.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/rpc_struct.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/rpc_compat.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/listener.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/bufferevent.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/thread.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/visibility.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/util.h" />
+          <root url="file://$MODULE_DIR$/lib/libevent/include/event2/buffer_compat.h" />
+        </excluded>
       </library>
     </orderEntry>
   </component>

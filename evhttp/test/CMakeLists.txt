@@ -1,12 +1,13 @@
 cmake_minimum_required(VERSION 2.8)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x")
-set(UT_BINARY zutil_ut)
+set(UT_BINARY zutil_evhttp_ut)
 set(gtest_SOURCE_DIR ${PROJECT_SOURCE_DIR}/lib/googletest)
-set(LINK_LIBARIES gtest gtest_main pthread utils)
+set(LINK_LIBARIES gtest gtest_main pthread base)
 
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-include_directories(${PROJECT_SOURCE_DIR}/utils)
+include_directories(${PROJECT_SOURCE_DIR}/base)
+include_directories(${libevent_SOURCE_DIR}/include)
 
 #AUX_SOURCE_DIRECTORY(. SOURCE_FILES)
 FILE(GLOB SOURCE_FILES  "*.cc" )

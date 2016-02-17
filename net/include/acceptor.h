@@ -5,7 +5,7 @@
 #ifndef ZUTILS_ACCEPTOR_H
 #define ZUTILS_ACCEPTOR_H
 
-#include "../../utils/include/common.h"
+#include "common.h"
 #include "channel.h"
 #include "zsocket.h"
 

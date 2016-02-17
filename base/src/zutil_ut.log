@@ -1,0 +1,162 @@
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:51 Thread@0x60004b0b0:0 starting
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:53 Thread@0x60004b0b0:0x60004b900 thread func started 0
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:102 Thread@0x60004b0b0:0x60004b900 thread routine
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:51 Thread@0x60004ba00:0 starting
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:107 Thread@0x60004b0b0:0x60004b900 run default function
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:19 watcher is going to sleep 0
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:102 Thread@0x60004ba00:0x600060ae0 thread routine
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:53 Thread@0x60004ba00:0x600060ae0 thread func started 0
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:107 Thread@0x60004ba00:0x600060ae0 run default function
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:57 start incr 0x600060ae0
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 1
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:51 Thread@0x600060be0:0 starting
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:53 Thread@0x600060be0:0x600098e60 thread func started 0
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:102 Thread@0x600060be0:0x600098e60 thread routine
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:57 start incr 0x600098e60
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:107 Thread@0x600060be0:0x600098e60 run default function
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:51 Thread@0x600098f60:0 starting
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 2
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:53 Thread@0x600098f60:0x600109340 thread func started 0
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:102 Thread@0x600098f60:0x600109340 thread routine
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:57 start incr 0x600109340
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:107 Thread@0x600098f60:0x600109340 run default function
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 3
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 4
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 5
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 6
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 7
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 8
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 9
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 10
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 11
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 12
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 13
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 14
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 15
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 16
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 17
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 18
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 19
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 20
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 21
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:21 watcher is waken up 21
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:24 watcher will exit
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 42
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 43
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 44
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 45
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 46
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 47
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 48
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 49
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 50
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 51
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 52
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 53
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 54
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 55
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 56
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 57
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 58
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 59
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 60
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 61
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 62
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 63
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 64
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 65
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 66
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 67
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 68
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 69
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 70
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 71
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 72
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 73
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 74
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 75
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 76
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 77
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 78
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 79
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:38 incr count 80
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:51 Thread@0x60004b920:0 starting
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:53 Thread@0x60004b920:0x600099060 thread func started 0
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:102 Thread@0x60004b920:0x600099060 thread routine
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:104 Thread@0x60004b920:0x600099060 run functor
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/thread_ut.cc:66 print sth
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:12 split 1,2,3,4,5
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 1 last delim 0
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token 1
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 3 last delim 2
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token 2
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 5 last delim 4
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token 3
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 7 last delim 6
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token 4
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:30 add token 5
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:12 split 1,,2,3,4,5
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 1 last delim 0
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token 1
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 2 last delim 2
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 4 last delim 3
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token 2
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 6 last delim 5
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token 3
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 8 last delim 7
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token 4
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:30 add token 5
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:12 split a=1,b=2,c=3,d=4,e=5
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 3 last delim 0
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token a=1
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 7 last delim 4
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token b=2
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 11 last delim 8
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token c=3
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 15 last delim 12
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token d=4
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:30 add token e=5
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:48 a:1
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:48 b:2
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:48 c:3
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:48 d:4
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:48 e:5
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:12 split a=1,b=2,c=3,d=4,e=5,f
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 3 last delim 0
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token a=1
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 7 last delim 4
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token b=2
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 11 last delim 8
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token c=3
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 15 last delim 12
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token d=4
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:20 delim pos 19 last delim 16
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:23 add token e=5
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:30 add token f
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:48 a:1
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:48 b:2
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:48 c:3
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:48 d:4
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/string_utils.cc:48 e:5
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:51 Thread@0x6000990d0:0 starting
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:53 Thread@0x6000990d0:0x6000994d0 thread func started 0
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:102 Thread@0x6000990d0:0x6000994d0 thread routine
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:51 Thread@0x6000992d0:0 starting
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:107 Thread@0x6000990d0:0x6000994d0 run default function
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:53 Thread@0x6000992d0:0x6000995d0 thread func started 0
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:102 Thread@0x6000992d0:0x6000995d0 thread routine
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/sensor_ut.cc:33 try to get 10 signal
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/src/zthread.cc:107 Thread@0x6000992d0:0x6000995d0 run default function
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/sensor_ut.cc:21 notify 0
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/sensor_ut.cc:21 notify 1
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/sensor_ut.cc:21 notify 2
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/sensor_ut.cc:21 notify 3
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/sensor_ut.cc:21 notify 4
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/sensor_ut.cc:21 notify 5
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/sensor_ut.cc:21 notify 6
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/sensor_ut.cc:21 notify 7
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/sensor_ut.cc:21 notify 8
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/sensor_ut.cc:21 notify 9
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/sensor_ut.cc:35 get 10 signal
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/arg_parser_ut.cc:12 file-ut.cc
+[DEBUG]2016-01-27 14:14:56 /home/lizhizhou/zlz_cpp_utils-master/utils/test/arg_parser_ut.cc:12 file-ut.cc

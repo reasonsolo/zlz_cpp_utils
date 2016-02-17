@@ -105,10 +105,7 @@ string INetAddress::Addr6ToIP(const struct sockaddr_in6& addr) {
 
 bool INetAddress::FdToLocalAddr(int32_t fd, struct sockaddr* sockaddr) {
     socklen_t addr_len = sizeof(struct sockaddr);
-    if (getsockname(fd, sockaddr, &addr_len) != 0) {
-        return false;
-    }
-    return true;
+    return getsockname(fd, sockaddr, &addr_len) == 0;
 }
 
 ZUTIL_NET_NAMESPACE_END

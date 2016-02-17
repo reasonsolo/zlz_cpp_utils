@@ -47,6 +47,7 @@ EventLoop::~EventLoop() {
 EventLoop* EventLoop::GetThreadLoop() {
     if (!loop_in_thread) {
         EventLoop* loop = new EventLoop();
+        (void)(loop);
         assert(loop_in_thread != nullptr);
     }
     return loop_in_thread;

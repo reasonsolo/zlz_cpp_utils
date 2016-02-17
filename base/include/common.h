@@ -51,6 +51,10 @@ using std::shared_ptr;
 #define ZUTIL_NET_NAMESPACE_END   }}
 #define ZUTIL_NET_NAMESPACE_USE   using namespace zutil::net
 
+#define ZUTIL_EV_NAMESPACE_BEGIN namespace zutil { namespace evhttp {
+#define ZUTIL_EV_NAMESPACE_END   }}
+#define ZUTIL_EV_NAMESPACE_USE   using namespace zutil::evhttp
+
 #define handle_sys_error(x) perror(x)
 
 const uint32_t kIOBufMax = 64 * 1024 * 1024;
