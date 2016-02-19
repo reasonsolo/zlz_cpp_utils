@@ -8,11 +8,13 @@
 #include "common.h"
 #include <event2/event.h>
 #include "string_utils.h"
+#include "zthread.h"
+#include "sensor.h"
 
 ZUTIL_EV_NAMESPACE_BEGIN
 
-class Sensor;
-class Thread;
+
+ZUTIL_NAMESPACE_USE;
 
 typedef std::function<void()> EvCallback;
 

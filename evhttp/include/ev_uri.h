@@ -18,13 +18,13 @@ enum class EvUriScheme {
     kOther
 };
 
-static const pair<const char*, EvUriScheme> schemes[] = {
-    make_pair("http", EvUriScheme::kHttp),
-    make_pair("https", EvUriScheme::kHttps),
-    make_pair("ftp", EvUriScheme::kFtp),
+static const pair<string, EvUriScheme> schemes[] = {
+    make_pair(string("http"), EvUriScheme::kHttp),
+    make_pair(string("https"), EvUriScheme::kHttps),
+    make_pair(string("ftp"), EvUriScheme::kFtp),
 };
 
-const map<const char*, EvUriScheme> schemes_map;
+extern const map<string, EvUriScheme> schemes_map;
 
 class EvUri {
 public:
@@ -34,6 +34,8 @@ public:
     EvUri(const string& full);
 
     void Parse(const string& full);
+
+    void Clear();
 
     const string& full() const {
         return full_;
@@ -55,10 +57,6 @@ public:
         return path_;
     }
 
-    const string& file() const {
-        return file_;
-    }
-
     const string& query() const {
         return query_;
     }
@@ -76,24 +74,13 @@ public:
     static string Decode(const string& input);
 
 private:
-    static size_t ParseScheme(const string& input, size_t start_pos, EvUriScheme& scheme);
-
-    static size_t ParseDomainPort(const string& input, size_t start_pos, string& domain, int32_t& port);
-
-    static size_t ParsePathFile(const string& input, size_t start_pos, string& path, string& file);
-
-    static size_t ParseQuery(const string& input, size_t start_pos, string& query);
-
-    static size_t ParseFragment(const string& input, size_t start_pos, string& fragment);
-
     static bool ParseQuery(const string& query, map<string, string>& query_map);
 
     string full_; // eg: http://a:8080/b/c.html?d=1&e=2#fg
     EvUriScheme scheme_; // eg: http
     string domain_; // eg: a
     int32_t port_; // eg: 8080, 80 by default
-    string path_; // eg: /b/
-    string file_; // eg: c.html
+    string path_; // eg: /b/c.html
     string query_; // eg: d=1&e=2
     string fragment_; // eg: fg
     map<string, string> query_map_; // d:1;e:2

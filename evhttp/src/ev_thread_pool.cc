@@ -23,13 +23,13 @@ void EvThreadPool::Init() {
 }
 
 void EvThreadPool::Clearup() {
-    for (auto thread: threads) {
+    for (auto thread: threads_) {
         delete thread;
     }
 }
 
 void EvThreadPool::Start() {
-    for (auto thread: threads) {
+    for (auto thread: threads_) {
         thread->Init();
         thread->Start();
     }
@@ -38,7 +38,7 @@ void EvThreadPool::Start() {
 }
 
 void EvThreadPool::Stop() {
-    for (auto thread: threads) {
+    for (auto thread: threads_) {
         thread->Stop();
     }
 }

@@ -5,8 +5,6 @@
 
 #include "ev_thread.h"
 #include "log.h"
-#include "zthread.h"
-#include "sensor.h"
 
 ZUTIL_EV_NAMESPACE_BEGIN
 
